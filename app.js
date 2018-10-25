@@ -4,7 +4,24 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+//db
+var mongoose = require('mongoose');
+mongoose.connect("mongodb://localhost/28015");
+
+//create database var for methods
+var db = mongoose.connection;
+//Error handler for db
+db.on("error", (err) => {
+  console.log("connection error:", err);
+});
+//open connection
+db.once("open", () => {
+  console.log("db connection successful");
+});
+
 var indexRouter = require('./routes/index');
+//Will not need userRouter but keep for reference
+// var usersRouter = require('./routes/users');
 
 var app = express();
 
@@ -19,7 +36,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+
+//Shouldnt need app.use('/users', userRouter) but keep here for reference
+// app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
