@@ -4,23 +4,29 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+
+
 //db
 var mongoose = require('mongoose');
-mongoose.connect("mongodb://localhost/28015");
 
-//create database var for methods
-var db = mongoose.connection;
-//Error handler for db
-db.on("error", (err) => {
-  console.log("connection error:", err);
-});
-//open connection
-db.once("open", () => {
-  console.log("db connection successful");
-});
+mongoose.connect("mongodb://localhost/motospot");
+mongoose.set('debug', true);
+
+
+
+// //create database var for methods
+// var db = mongoose.connection;
+// //Error handler for db
+// db.on("error", (err) => {
+//   console.log("connection error:", err);
+// });
+// //open connection
+// db.once("open", () => {
+//   console.log("db connection successful bitches");
+// });
 
 var indexRouter = require('./routes/index');
-//Will not need userRouter but keep for reference
+//Will not need userRouter but keep comment for reference
 // var usersRouter = require('./routes/users');
 
 var app = express();
