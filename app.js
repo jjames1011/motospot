@@ -31,6 +31,7 @@ db.once('open', function() {
   Kitten.find(function(err, kittens) {
     if(err) return console.log(err);
     console.log(kittens);
+    
   });
 });
 
