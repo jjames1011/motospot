@@ -1,8 +1,25 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  text-align: center;
 }
 
 a {
   color: #00B7FF;
+}
+
+/* layout styles --------------- */
+
+label {
+  display: block;
+}
+input[type='submit'] {
+  display: block;
+  margin: auto;
+}
+
+.postform {
+  width: 60%;
+  margin: auto;
+  border: 2px solid black;
 }

@@ -3,30 +3,39 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
-
-
-//db
 var mongoose = require('mongoose');
 
-mongoose.connect("mongodb://localhost/motospot");
-mongoose.set('debug', true);
+mongoose.connect("mongodb://localhost/test", { useNewUrlParser: true });
+
+var db = mongoose.connection;
+
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  var kittySchema = new mongoose.Schema({
+    name: String
+  });
+  kittySchema.methods.speak = function() {
+    var greeting = this.name ? "Meow name is " + this.name : "I don't have a name";
+    console.log(greeting);
+  }
+  var Kitten = mongoose.model("Kitten", kittySchema);
+
+  var whiskers = new Kitten({name: 'whiskers'});
+
+  whiskers.save(function(err, whiskers) {
+    if(err) return console.log(err);
+    whiskers.speak();
+  });
 
 
-
-// //create database var for methods
-// var db = mongoose.connection;
-// //Error handler for db
-// db.on("error", (err) => {
-//   console.log("connection error:", err);
-// });
-// //open connection
-// db.once("open", () => {
-//   console.log("db connection successful bitches");
-// });
+  Kitten.find(function(err, kittens) {
+    if(err) return console.log(err);
+    console.log(kittens);
+  });
+});
 
 var indexRouter = require('./routes/index');
-//Will not need userRouter but keep comment for reference
+
 // var usersRouter = require('./routes/users');
 
 var app = express();
@@ -43,7 +52,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 
-//Shouldnt need app.use('/users', userRouter) but keep here for reference
 // app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler

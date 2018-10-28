@@ -1,0 +1,15 @@
+extends layout 
+
+block content
+  h1 post a spot
+  
+  div(class='postform')
+    form(action='/postaspot' method='post')
+      label(for='title') Title of post:
+      input(type='text' value='title')
+      label(for='email') Please enter your email: 
+      input(type='email' value='Please enter email')
+      label(for='textarea') Enter a description:
+      textarea(rows='4' cols='50')
+      input(type='submit' value='submit')
+        
