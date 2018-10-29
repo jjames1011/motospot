@@ -3,9 +3,16 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+
+//for uploading files
+// var multer = require('multer');
+// var upload = multer();
+
 var mongoose = require('mongoose');
 
 mongoose.connect("mongodb://localhost/test", { useNewUrlParser: true });
+
+require('./models/Post');
 
 var db = mongoose.connection;
 
@@ -31,7 +38,7 @@ db.once('open', function() {
   Kitten.find(function(err, kittens) {
     if(err) return console.log(err);
     console.log(kittens);
-    
+
   });
 });
 
@@ -44,6 +51,12 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
+
+//form urlencoded
+//for parsing multipart/form-data
+//for uploading files
+// app.use(upload.array());
+
 
 app.use(logger('dev'));
 app.use(express.json());
