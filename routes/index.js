@@ -4,9 +4,6 @@ var mongoose = require('mongoose');
 var Post = mongoose.model('Post');
 
 
-
-
-
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.redirect('/homepage');
@@ -26,12 +23,10 @@ router.post('/postaspot', function(req, res, next) {
       email: req.body.email,
       description: req.body.description
     });
-
-    console.log('chea we got here');
     newPost.save(function(err, newPost) {
       if(err) return console.log(err);
+
       //eventually want to redirect here to '/singlepost'
-      console.log('got here too');
       res.send(newPost);
 
   });

@@ -4,7 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-//for uploading files
+//for uploading files checkout the multer package:
 // var multer = require('multer');
 // var upload = multer();
 
@@ -16,31 +16,9 @@ require('./models/Post');
 
 var db = mongoose.connection;
 
+//in case of db connetion error:
 db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
-  var kittySchema = new mongoose.Schema({
-    name: String
-  });
-  kittySchema.methods.speak = function() {
-    var greeting = this.name ? "Meow name is " + this.name : "I don't have a name";
-    console.log(greeting);
-  }
-  var Kitten = mongoose.model("Kitten", kittySchema);
 
-  var whiskers = new Kitten({name: 'whiskers'});
-
-  whiskers.save(function(err, whiskers) {
-    if(err) return console.log(err);
-    whiskers.speak();
-  });
-
-
-  Kitten.find(function(err, kittens) {
-    if(err) return console.log(err);
-    console.log(kittens);
-
-  });
-});
 
 var indexRouter = require('./routes/index');
 
@@ -51,11 +29,6 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
-
-//form urlencoded
-//for parsing multipart/form-data
-//for uploading files
-// app.use(upload.array());
 
 
 app.use(logger('dev'));
