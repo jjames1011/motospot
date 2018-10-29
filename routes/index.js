@@ -26,8 +26,8 @@ router.post('/postaspot', function(req, res, next) {
     newPost.save(function(err, newPost) {
       if(err) return console.log(err);
 
-      //eventually want to redirect here to '/singlepost'
-      res.send(newPost);
+      //TODO:eventually want to redirect here to '/singlepost'
+      res.render('singlepost', {post: newPost});
 
   });
   // res.send(req.body);
@@ -36,7 +36,24 @@ router.post('/postaspot', function(req, res, next) {
 //browse spots
 
 router.get('/browse', function(req, res, next) {
-  res.render('browseposts', {title : "Browse posts"});
-})
+  //TODO: add search/filter functionality:
+
+  Post.find(function(err, posts) {
+    if(err) return console.log(err);
+    if(posts.length === 0){
+      res.send('sorry there are currently no posts');
+    } else {
+    res.render('browseposts', {posts: posts});
+  }
+  });
+  // console.log(posts);
+  // res.send('didnt work');
+});
+
+router.get('/singlepost', function(req, res, next) {
+  res.send('GOT IT');
+  //TODO: finish setting up route. Use query string to get
+  //the post from the db and render it here with the singlepost template.
+});
 
 module.exports = router;
