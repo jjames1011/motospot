@@ -47,7 +47,11 @@ router.get('/singlepost', function(req, res, next) {
   // res.send(req.query.id);
   if(req.query.id){
     Post.findById(req.query.id, function(err, post) {
-      res.render('singlepost', {post : post});
+      if(post){
+        res.render('singlepost', {post : post});
+      } else {
+        res.redirect('/browse');
+      }
     });
   } else {
     return res.redirect('/browse');
