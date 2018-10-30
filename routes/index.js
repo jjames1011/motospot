@@ -45,9 +45,13 @@ router.get('/browse', function(req, res, next) {
 
 router.get('/singlepost', function(req, res, next) {
   // res.send(req.query.id);
-  Post.findById(req.query.id, function(err, post) {
-    res.render('singlepost', {post : post});
-  });
+  if(req.query.id){
+    Post.findById(req.query.id, function(err, post) {
+      res.render('singlepost', {post : post});
+    });
+  } else {
+    return res.redirect('/browse');
+  }
 });
 
 //TODO Create the route to delete a post
