@@ -25,15 +25,11 @@ router.post('/postaspot', function(req, res, next) {
     });
     newPost.save(function(err, newPost) {
       if(err) return console.log(err);
-
       res.redirect('/singlepost?id=' + newPost.id);
-
   });
-  // res.send(req.body);
 });
 
 //browse spots
-
 router.get('/browse', function(req, res, next) {
   //TODO: add search/filter functionality:
 
@@ -53,5 +49,7 @@ router.get('/singlepost', function(req, res, next) {
     res.render('singlepost', {post : post});
   });
 });
+
+//TODO Create the route to delete a post
 
 module.exports = router;
