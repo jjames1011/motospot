@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var Post = mongoose.model('Post');
+var moment = require('moment');
 
 
 /* GET home page. */
@@ -18,14 +19,19 @@ router.get('/postaspot', function(req, res, next) {
 });
 
 router.post('/postaspot', function(req, res, next) {
-    var newPost = new Post({
-      title: req.body.title,
-      email: req.body.email,
-      description: req.body.description
-    });
-    newPost.save(function(err, newPost) {
-      if(err) return console.log(err);
-      res.redirect('/singlepost?id=' + newPost.id);
+  //Use moment to add month to date for expiration
+  var expireAt = moment().add(1, 'month').toDate();
+  console.log('expire at ' + expireAt);
+
+  var newPost = new Post({
+    title: req.body.title,
+    email: req.body.email,
+    description: req.body.description,
+    expireAt: expireAt
+  });
+  newPost.save(function(err, newPost) {
+    if(err) return console.log(err);
+    res.redirect('/singlepost?id=' + newPost.id);
   });
 });
 
