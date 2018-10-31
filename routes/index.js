@@ -19,9 +19,9 @@ router.get('/postaspot', function(req, res, next) {
 });
 
 router.post('/postaspot', function(req, res, next) {
-  //Use moment to add month to date for expiration
+  //Use moment to add month to date for auto document expiration
   var expireAt = moment().add(1, 'month').toDate();
-  console.log('expire at ' + expireAt);
+  
 
   var newPost = new Post({
     title: req.body.title,
