@@ -3,4 +3,7 @@ extends layout
 block content
   h1 #{post.title}
   p #{post.email}
+  button(onclick='hideshow()') Show address
+  div(id='hideshow')
+    p #{post.address}
   p #{post.description}
