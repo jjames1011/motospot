@@ -21,11 +21,12 @@ router.get('/postaspot', function(req, res, next) {
 router.post('/postaspot', function(req, res, next) {
   //Use moment to add month to date for auto document expiration
   var expireAt = moment().add(1, 'month').toDate();
-  
+
 
   var newPost = new Post({
     title: req.body.title,
     email: req.body.email,
+    address: req.body.address,
     description: req.body.description,
     expireAt: expireAt
   });
