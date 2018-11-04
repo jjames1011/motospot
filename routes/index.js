@@ -55,7 +55,10 @@ router.get('/singlepost', function(req, res, next) {
   if(req.query.id){
     Post.findById(req.query.id, function(err, post) {
       if(post){
-        res.render('singlepost', {post : post});
+        // var formattedDate = moment(post.createdAt).format('MMMM Do, YYYY');
+        var formattedDate = moment(post.createdAt).fromNow();
+
+        res.render('singlepost', {post : post, postedDate: formattedDate});
       } else {
         res.redirect('/browse');
       }
