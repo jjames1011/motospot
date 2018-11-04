@@ -21,6 +21,10 @@ button {
   /* display: block; */
   margin: auto;
 }
+nav ul li {
+  list-style: none;
+  display: inline;
+}
 
 .postform {
   width: 60%;
