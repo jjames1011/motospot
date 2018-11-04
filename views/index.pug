@@ -2,13 +2,11 @@ extends layout
 
 block content
   header
-    h1 Welcome to #{title}
+    h1 Welcome to Motospot!
     p What would you like to do? 
     
   div 
-    div
-      a(href="/postaspot"): input(type='button' value="Post a spot" class="btn")
-    div 
-      a(href="/browse"): input(type='button' value="Look for a spot" class="btn") 
+      a(href="/browse"): input(type='button' value="Post a spot" class="btn")
+      a(href="/browse#browse"): input(type='button' value="Look for a spot" class="btn") 
   
   

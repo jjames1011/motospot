@@ -1,6 +1,8 @@
 extends layout
 
 block content
+  nav 
+    a(href='/browse')  MotoSpot
   h1 #{post.title}
   p Posted: #{postedDate}
   //- Needs to be in order of button -> div for the hideshow(e) to work
