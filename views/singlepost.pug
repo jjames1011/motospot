@@ -11,4 +11,6 @@ block content
   button(onclick='hideshow(event)') Show address
   div(class='hideshow')
     p #{post.address}
-  p #{post.description}
+  p 
+    em Description: 
+    | #{post.description}
