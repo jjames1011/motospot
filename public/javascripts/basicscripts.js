@@ -1,6 +1,5 @@
-function hideshow() {
-  console.log('fired');
-  var x = document.getElementById('hideshow');
+function hideshow(ev) {
+  var x = ev.target.nextSibling;
   if(x.style.display == 'block') {
     x.style.display = 'none';
   } else {
