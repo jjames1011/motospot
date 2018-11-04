@@ -1,0 +1,6 @@
+h1(id='browse') Browse posts: 
+
+ul
+  each post in posts
+    - var postId = post._id
+    a(href='singlepost?id=' + postId): li #{post.title}
