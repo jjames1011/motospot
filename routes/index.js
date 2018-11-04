@@ -1,8 +1,9 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
-var Post = mongoose.model('Post');
 var moment = require('moment');
+//models:
+var Post = mongoose.model('Post');
 
 
 /* GET home page. */
@@ -10,7 +11,7 @@ router.get('/', function(req, res, next) {
   res.redirect('/homepage');
 });
 router.get('/homepage', function(req, res, next){
-  res.render('index', {title: 'MotoSpot'});
+  res.render('index');
 });
 
 // postaspot
@@ -21,7 +22,6 @@ router.get('/postaspot', function(req, res, next) {
 router.post('/postaspot', function(req, res, next) {
   //Use moment to add month to date for auto document expiration
   var expireAt = moment().add(1, 'month').toDate();
-
 
   var newPost = new Post({
     title: req.body.title,
@@ -45,7 +45,7 @@ router.get('/browse', function(req, res, next) {
     if(posts.length === 0){
       res.send('sorry there are currently no posts');
     } else {
-    res.render('browseposts', {posts: posts});
+    res.render('main', {posts: posts});
   }
   });
 });
