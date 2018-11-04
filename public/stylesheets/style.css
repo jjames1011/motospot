@@ -18,7 +18,7 @@ input[type='submit'] {
   margin: auto;
 }
 button {
-  display: block;
+  /* display: block; */
   margin: auto;
 }
 
