@@ -68,6 +68,11 @@ router.get('/singlepost', function(req, res, next) {
   }
 });
 
+router.get('/faq', function(req, res, next) {
+  res.send('Here will be the FAQ/Help Page');
+
+});
+
 //TODO Create the route to delete a post
 
 module.exports = router;
