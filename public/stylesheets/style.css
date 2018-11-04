@@ -17,6 +17,10 @@ input[type='submit'] {
   display: block;
   margin: auto;
 }
+button {
+  display: block;
+  margin: auto;
+}
 
 .postform {
   width: 60%;
@@ -24,6 +28,6 @@ input[type='submit'] {
   border: 2px solid black;
 }
 
-#hideshow {
+.hideshow {
   display: none;
 }
