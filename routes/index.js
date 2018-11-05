@@ -42,11 +42,25 @@ router.get('/browse', function(req, res, next) {
 
   Post.find(function(err, posts) {
     if(err) return console.log(err);
+    var title = 'MOTOSPOT || Browse posts';
     if(posts.length === 0){
       res.send('sorry there are currently no posts');
     } else {
-    res.render('main', {posts: posts});
-  }
+        if(req.query.err) {
+          console.log('this juan');
+          res.render('main', {
+            title:title,
+            posts: posts,
+            error: 'Could not find the post you were looking for'
+          });
+        } else {
+          console.log('this naw');
+          console.log(req.query.err);
+            res.render('main', {
+            title: title,
+            posts: posts});
+      }
+    }
   });
 });
 
@@ -57,19 +71,23 @@ router.get('/singlepost', function(req, res, next) {
       if(post){
         // var formattedDate = moment(post.createdAt).format('MMMM Do, YYYY');
         var formattedDate = moment(post.createdAt).fromNow();
+        var title = post.title;
 
-        res.render('singlepost', {post : post, postedDate: formattedDate});
+        res.render('singlepost', {
+          post : post,
+          postedDate: formattedDate,
+          title: title});
       } else {
-        res.redirect('/browse');
+        return res.redirect('/browse?err=true');
       }
     });
   } else {
-    return res.redirect('/browse');
+    return res.redirect('/browse?err=true');
   }
 });
 
 router.get('/faq', function(req, res, next) {
-  res.send('Here will be the FAQ/Help Page');
+  res.render('faq', {title: 'FAQ'});
 
 });
 
