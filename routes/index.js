@@ -47,15 +47,12 @@ router.get('/browse', function(req, res, next) {
       res.send('sorry there are currently no posts');
     } else {
         if(req.query.err) {
-          console.log('this juan');
           res.render('main', {
-            title:title,
+            title: title,
             posts: posts,
             error: 'Could not find the post you were looking for'
           });
         } else {
-          console.log('this naw');
-          console.log(req.query.err);
             res.render('main', {
             title: title,
             posts: posts});
