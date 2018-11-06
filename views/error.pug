@@ -1,6 +1,11 @@
 extends layout
 
 block content
-  h1= message
-  h2= error.status
-  pre #{error.stack}
+  nav
+    a(href='/') Home 
+    | |
+    a(href='/browse') Browse
+    | |
+    a(href='/FAQ') FAQ
+  h1= error.status + ' ' +  message
+  h2 Whoops! Looks like something went wrong!

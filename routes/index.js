@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var moment = require('moment');
+var createError = require('http-errors');
 //models:
 var Post = mongoose.model('Post');
 
@@ -46,7 +47,7 @@ router.get('/browse', function(req, res, next) {
           res.render('main', {
             title: title,
             posts: posts,
-            error: 'Could not find the post you were looking for'
+            err: 'Could not find the post you were looking for'
           });
         } else {
             res.render('main', {
@@ -84,6 +85,9 @@ router.get('/faq', function(req, res, next) {
 
 });
 
+
 //TODO Create the route to delete a post
+
+
 
 module.exports = router;
