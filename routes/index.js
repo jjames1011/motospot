@@ -14,10 +14,6 @@ router.get('/homepage', function(req, res, next){
   res.render('index');
 });
 
-// postaspot
-router.get('/postaspot', function(req, res, next) {
-  res.render('postform', {post: 'post a spot'});
-});
 
 router.post('/postaspot', function(req, res, next) {
   //Use moment to add month to date for auto document expiration
