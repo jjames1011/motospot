@@ -34,7 +34,6 @@ router.post('/postaspot', function(req, res, next) {
     if(err) return console.log(err);
 
     //send email if no error
-    nodemailer.createTestAccount((err, account) => {
       let transporter = nodemailer.createTransport({
         host: 'smtp.gmail.com',
         port: 465,
@@ -57,7 +56,7 @@ router.post('/postaspot', function(req, res, next) {
         console.log('Message sent: %s', info.messageId);
 
       });
-    });
+
     res.redirect('/singlepost?id=' + newPost.id);
   });
 });
