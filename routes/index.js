@@ -3,8 +3,11 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var moment = require('moment');
 var createError = require('http-errors');
+var nodemailer = require('nodemailer');
+require('dotenv').config()
 //models:
 var Post = mongoose.model('Post');
+
 
 
 /* GET home page. */
@@ -29,6 +32,32 @@ router.post('/postaspot', function(req, res, next) {
   });
   newPost.save(function(err, newPost) {
     if(err) return console.log(err);
+
+    //send email if no error
+    nodemailer.createTestAccount((err, account) => {
+      let transporter = nodemailer.createTransport({
+        host: 'smtp.gmail.com',
+        port: 465,
+        secure: true,
+        auth: {
+          user: process.env.GMAIL_USER,
+          pass: process.env.GMAIL_PASS
+        }
+      });
+      let mailOptions = {
+        from: process.env.GMAIL_USER,
+        to: req.body.email,
+        subject: 'MOTOSPOT Ad confirmation',
+        text: 'Your spot has been posted successfully!',
+        html: '<h2>Your ad was successfully posted to Motospot.com!</h2>'
+      };
+
+      transporter.sendMail(mailOptions, (error, info) => {
+        if(error) {return console.log(error);}
+        console.log('Message sent: %s', info.messageId);
+
+      });
+    });
     res.redirect('/singlepost?id=' + newPost.id);
   });
 });
