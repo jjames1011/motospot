@@ -1,6 +1,9 @@
 h1(id='browse') Browse posts: 
 
-ul
-  each post in posts
-    - var postId = post._id
-    a(href='singlepost?id=' + postId): li #{post.title}
+if !posts
+  p Sorry there are currently no posts. Feel free to add one!
+else
+  ul
+    each post in posts
+      - var postId = post._id
+      a(href='singlepost?id=' + postId): li #{post.title}

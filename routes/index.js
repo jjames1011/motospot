@@ -69,7 +69,10 @@ router.get('/browse', function(req, res, next) {
     if(err) return console.log(err);
     var title = 'MOTOSPOT || Browse posts';
     if(posts.length === 0){
-      res.send('sorry there are currently no posts');
+      res.render('main', {
+        title: title,
+        posts: null
+      });
     } else {
         if(req.query.err) {
           res.render('main', {
