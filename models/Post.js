@@ -1,10 +1,12 @@
 var mongoose = require('mongoose');
+var ObjectId = mongoose.Schema.Types.ObjectId;
 
 var postSchema = new mongoose.Schema({
   title: String,
   email: String,
   description: String,
   address: String,
+  delKey: ObjectId,
   createdAt: {
     type: Date,
     default: Date.now
@@ -15,6 +17,7 @@ var postSchema = new mongoose.Schema({
   }
 });
 
+postSchema.index({delKey: 1}, { unique: true});
 postSchema.index({expireAt: 1}, {expireAfterSeconds: 0});
 
 //how to add a method if needed:
