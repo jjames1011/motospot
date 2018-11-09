@@ -51,7 +51,8 @@ router.post('/postaspot', function(req, res, next) {
         to: req.body.email,
         subject: 'MOTOSPOT Ad confirmation',
         text: 'Your spot has been posted successfully!',
-        html: '<h2>Your ad was successfully posted to Motospot.com!</h2>'
+        html: `<h2>Your ad was successfully posted to Motospot.com!</h2>
+        <p>Delete your post <a href="http://localhost:3000/delete?key=${delKey}">here</a>`
       };
 
       transporter.sendMail(mailOptions, (error, info) => {
@@ -121,6 +122,10 @@ router.get('/faq', function(req, res, next) {
 
 
 //TODO Create the route to delete a post
+
+router.get('/delete', function(req, res, next) {
+  res.send('Your delete key is ' + req.query.key);
+});
 
 
 
