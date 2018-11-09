@@ -16,7 +16,7 @@ require('./models/Post');
 
 var db = mongoose.connection;
 
-//in case of db connetion error:
+//in case of db connection error:
 db.on('error', console.error.bind(console, 'connection error:'));
 
 

@@ -52,7 +52,8 @@ router.post('/postaspot', function(req, res, next) {
         subject: 'MOTOSPOT Ad confirmation',
         text: 'Your spot has been posted successfully!',
         html: `<h2>Your ad was successfully posted to Motospot.com!</h2>
-        <p>Delete your post <a href="http://localhost:3000/delete?key=${delKey}">here</a>`
+        <p>Delete your post <a href="http://localhost:3000/del?key=${delKey}">here</a></p>
+        <p> Or click <a href="http://localhost:3000/singlepost?id=${newPost.id}">Here</a> to view your post live!</p>`
       };
 
       transporter.sendMail(mailOptions, (error, info) => {
@@ -121,10 +122,20 @@ router.get('/faq', function(req, res, next) {
 });
 
 
-//TODO Create the route to delete a post
-
-router.get('/delete', function(req, res, next) {
-  res.send('Your delete key is ' + req.query.key);
+router.get('/del', function(req, res, next) {
+  // res.send('Your delete key is ' + req.query.key);
+  if(req.query.key){
+    Post.deleteOne({delKey: req.query.key}, function(err, post) {
+      if(err){return next(createError(500))}
+      if (post.n === 0){
+        res.send('error no post has been deleted. Probably because the delete key was wrong or because there was no tied to it');
+      } else {
+        res.send('Your post has been deleted!');
+      }
+    });
+  } else {
+    return next(createError(500));
+  }
 });
 
 
