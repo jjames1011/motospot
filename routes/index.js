@@ -30,7 +30,12 @@ router.post('/postaspot', function(req, res, next) {
     email: req.body.email,
     firstName: req.body.firstName,
     lastName: req.body.lastName,
-    address: req.body.address,
+    addressLine1: req.body.addressLine1,
+    addressLine2: req.body.addressLine2,
+    city: req.body.city,
+    stateProvinceRegion: req.body.stateProvinceRegion,
+    zipOrPostal: req.body.zipOrPostal,
+    county: req.body.country,
     description: req.body.description,
     expireAt: expireAt,
     delKey: delKey
