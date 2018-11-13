@@ -117,13 +117,11 @@ router.get('/singlepost', function(req, res, next) {
 });
 
 router.get('/faq', function(req, res, next) {
-  res.render('faq', {title: 'FAQ'});
-
+  res.render('faq', {title: 'MOTOSPOT || FAQ'});
 });
 
 
 router.get('/del', function(req, res, next) {
-  // res.send('Your delete key is ' + req.query.key);
   if(req.query.key){
     Post.deleteOne({delKey: req.query.key}, function(err, post) {
       if(err){return next(createError(500))}
