@@ -72,7 +72,7 @@ router.post('/postaspot', function(req, res, next) {
 router.get('/browse', function(req, res, next) {
   //TODO: add search/filter functionality:
 
-  Post.find(function(err, posts) {
+  Post.find({}, null, {sort:{createdAt: -1}},function(err, posts) {
     if(err) return console.log(err);
     var title = 'MOTOSPOT || Browse posts';
     if(posts.length === 0){
