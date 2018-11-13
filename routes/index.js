@@ -28,6 +28,8 @@ router.post('/postaspot', function(req, res, next) {
   var newPost = new Post({
     title: req.body.title,
     email: req.body.email,
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
     address: req.body.address,
     description: req.body.description,
     expireAt: expireAt,

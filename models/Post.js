@@ -4,6 +4,8 @@ var ObjectId = mongoose.Schema.Types.ObjectId;
 var postSchema = new mongoose.Schema({
   title: String,
   email: String,
+  firstName: String,
+  lastName: String,
   description: String,
   address: String,
   delKey: ObjectId,
