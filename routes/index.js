@@ -71,7 +71,8 @@ router.post('/postaspot', function(req, res, next) {
 //browse spots
 router.get('/browse', function(req, res, next) {
   //TODO: add search/filter functionality:
-
+  //Sorting syntax: Model.find({conditions}, {projection(optional fields to return)},
+  // {options: object(sort)}, [callback: function])
   Post.find({}, null, {sort:{createdAt: -1}},function(err, posts) {
     if(err) return console.log(err);
     var title = 'MOTOSPOT || Browse posts';
