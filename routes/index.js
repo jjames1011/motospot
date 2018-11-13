@@ -10,7 +10,7 @@ var Post = mongoose.model('Post');
 
 
 
-/* GET home page. */
+
 router.get('/', function(req, res, next) {
   res.redirect('/homepage');
 });
