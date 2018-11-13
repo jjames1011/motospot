@@ -35,7 +35,7 @@ router.post('/postaspot', function(req, res, next) {
     city: req.body.city,
     stateProvinceRegion: req.body.stateProvinceRegion,
     zipOrPostal: req.body.zipOrPostal,
-    county: req.body.country,
+    country: req.body.country,
     description: req.body.description,
     expireAt: expireAt,
     delKey: delKey
@@ -103,7 +103,6 @@ router.get('/browse', function(req, res, next) {
 });
 
 router.get('/singlepost', function(req, res, next) {
-  // res.send(req.query.id);
   if(req.query.id){
     Post.findById(req.query.id, function(err, post) {
       if(post){
