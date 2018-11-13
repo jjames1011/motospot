@@ -28,8 +28,7 @@ router.post('/postaspot', function(req, res, next) {
   var newPost = new Post({
     title: req.body.title,
     email: req.body.email,
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
+    fullName: req.body.fullName,
     addressLine1: req.body.addressLine1,
     addressLine2: req.body.addressLine2,
     city: req.body.city,
@@ -58,7 +57,7 @@ router.post('/postaspot', function(req, res, next) {
         to: req.body.email,
         subject: 'MOTOSPOT Ad confirmation',
         text: 'Your spot has been posted successfully!',
-        html: `<h2>Your ad was successfully posted to Motospot.com!</h2>
+        html: `<h2>Thanks ${newPost.fullName} for posting your extra space on Motospot!</h2>
         <p>Delete your post <a href="http://localhost:3000/del?key=${delKey}">here</a></p>
         <p> Or click <a href="http://localhost:3000/singlepost?id=${newPost.id}">Here</a> to view your post live!</p>`
       };
