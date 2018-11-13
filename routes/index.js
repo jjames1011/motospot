@@ -126,9 +126,15 @@ router.get('/del', function(req, res, next) {
     Post.deleteOne({delKey: req.query.key}, function(err, post) {
       if(err){return next(createError(500))}
       if (post.n === 0){
-        res.send('error no post has been deleted. Probably because the delete key was wrong or because there was no post tied to it');
+        res.render('deleted', {
+          title: 'MOTOSPOT || Delete Post',
+          message: 'This post has already been deleted'
+        });
       } else {
-        res.send('Your post has been deleted!');
+        res.render('deleted', {
+          title: 'MOTOSPOT || Post Deleted',
+          message: 'Your Post has Been Deleted'
+        });
       }
     });
   } else {
