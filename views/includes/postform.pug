@@ -9,14 +9,25 @@ div(class='postform')
   form(action='/postaspot' method='post')
     label(for='title') Title of post:
     input(type='text' value='title' name='title')
-    label(for='firstName') Enter your first name:
-    input(type='text' value='First Name' name='firstName')
-    label(for='lastName') Enter your last name:
-    input(type='text' value='Last Name' name='lastName')
     label(for='email') Please enter your email: 
     input(type='email' name='email' value='Please enter email')
-    label(for='address') Please enter the address of the available spot:
-    input(type='address' name='address' value='Please enter address')
+      
+    
+    label(for='lastName') Enter your full name:
+    input(type='text' name='fullName')
+    label(for='title') Address Line 1:
+    input(type='text' name='addressLine1')
+    label(for='title') Address Line 2:
+    input(type='text'  name='addressLine2')
+    label(for='title') City:
+    input(type='text' name='city')
+    label(for='title') State / Province / Region:
+    input(type='text' name='stateProvinceRegion')
+    label(for='title') ZIP / Postal Code:
+    input(type='text' name='zipOrPostal')
+        
+    
+    
     label(for='textarea') Enter a description:
     textarea(name='description' rows='4' cols='50')
     input(type='submit' value='submit')
