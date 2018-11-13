@@ -15,7 +15,7 @@ router.get('/', function(req, res, next) {
   res.redirect('/homepage');
 });
 router.get('/homepage', function(req, res, next){
-  res.render('index');
+  res.render('index', {title: 'Motospot || Find a spot for your ride!'});
 });
 
 
@@ -138,7 +138,7 @@ router.get('/del', function(req, res, next) {
         });
       } else {
         res.render('deleted', {
-          title: 'MOTOSPOT || Post Deleted',
+          title: 'MOTOSPOT || Delete Post',
           message: 'Your Post has Been Deleted'
         });
       }
