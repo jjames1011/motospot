@@ -106,13 +106,18 @@ router.get('/singlepost', function(req, res, next) {
     Post.findById(req.query.id, function(err, post) {
       if(post){
         // var formattedDate = moment(post.createdAt).format('MMMM Do, YYYY');
-        var formattedDate = moment(post.createdAt).fromNow();
-        var title = post.title;
+        let formattedDate = moment(post.createdAt).fromNow();
+        let title = post.title;
+        // TODO: figure out how to reverse geocode from address to coordinates
+        // and insert it here for the front end js to render the correct map
+        let lonLat = '';
+
 
         res.render('singlepost', {
           post : post,
           postedDate: formattedDate,
-          title: title});
+          title: title,
+          lonLat: '[-122.674510,45.570860]'});
       } else {
         return res.redirect('/browse?err=true');
       }
