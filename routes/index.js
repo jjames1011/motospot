@@ -110,9 +110,9 @@ router.get('/singlepost', function(req, res, next) {
         let formattedDate = moment(post.createdAt).fromNow();
         let title = post.title;
         let lonLat = ''
-        //request options for when we send http request to nominatim api for reverse geocoding
+        //request options for http request to nominatim api for reverse geocoding
         let requestOpts = {
-          url: 'https://nominatim.openstreetmap.org/search?format=json&city=Portland&state=Oregon',
+          url: `https://nominatim.openstreetmap.org/search?format=json&postalcode=${post.zipOrPostal}`,
           method: "GET",
           headers: {
             'Accept': 'application/json,text/html,application/xhtml+xml,application/xml,application/xml;q=0.9,*/*;q=0.8',
@@ -124,19 +124,21 @@ router.get('/singlepost', function(req, res, next) {
             'User-Agent': 'Motospot (node application)'
           }
         }
+
         request(requestOpts, (err, response, body) => {
-          console.log('error:', err);
-          console.log('statusCode', response && response.statusCode);
+          // console.log('error:', err);
+          // console.log('statusCode', response && response.statusCode);
           lonLat = `[${JSON.parse(body)[0].lon},${JSON.parse(body)[0].lat}]`;
           console.log(lonLat);
+          res.render('singlepost', {
+            post : post,
+            postedDate: formattedDate,
+            title: title,
+            //pass the lonLat var here and get to work
+            // '[-122.674510,45.570860]'
+            lonLat: lonLat });
         });
 
-        res.render('singlepost', {
-          post : post,
-          postedDate: formattedDate,
-          title: title,
-          //pass the lonLat var here and get to work
-          lonLat: '[-122.674510,45.570860]'});
       } else {
         //#TODO: use nextError() instead of query params
         return res.redirect('/browse?err=true');
