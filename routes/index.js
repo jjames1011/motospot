@@ -49,6 +49,7 @@ router.post('/postaspot', function(req, res, next) {
     lonLat = `[${JSON.parse(body)[0].lon},${JSON.parse(body)[0].lat}]`;
     newPost = new Post({
       title: req.body.title,
+      price: req.body.price,
       email: req.body.email,
       fullName: req.body.fullName,
       description: req.body.description,

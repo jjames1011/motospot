@@ -3,6 +3,7 @@ var ObjectId = mongoose.Schema.Types.ObjectId;
 
 var postSchema = new mongoose.Schema({
   title: String,
+  price: Number,
   email: String,
   fullName: String,
   description: String,

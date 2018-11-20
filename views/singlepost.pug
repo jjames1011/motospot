@@ -3,7 +3,7 @@ extends layout
 block content
   nav 
     a(href='/browse') <-- back
-  h1 #{post.title}
+  h1 $#{post.price}/MO | #{post.title}
   p Posted: #{postedDate}
   //- Needs to be in order of button -> div for the hideshow(e) to work
   button(onClick='hideshow(event);') Contact The poster
