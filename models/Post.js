@@ -13,6 +13,7 @@ var postSchema = new mongoose.Schema({
   zipOrPostal: Number,
   country: String,
   delKey: ObjectId,
+  lonLat: String,
   createdAt: {
     type: Date,
     default: Date.now

@@ -22,54 +22,78 @@ router.get('/homepage', function(req, res, next){
 
 router.post('/postaspot', function(req, res, next) {
   //Use moment to add month to date for auto document expiration
-  var expireAt = moment().add(1, 'month').toDate();
+  let expireAt = moment().add(1, 'month').toDate();
   //Use mongo ObjectId() to create a new id for the delKey
-  var delKey = new mongoose.Types.ObjectId();
+  let delKey = new mongoose.Types.ObjectId();
+  let lonLat;
+  let newPost;
 
-  var newPost = new Post({
-    title: req.body.title,
-    email: req.body.email,
-    fullName: req.body.fullName,
-    addressLine1: req.body.addressLine1,
-    addressLine2: req.body.addressLine2,
-    city: req.body.city,
-    stateProvinceRegion: req.body.stateProvinceRegion,
-    zipOrPostal: req.body.zipOrPostal,
-    country: req.body.country,
-    description: req.body.description,
-    expireAt: expireAt,
-    delKey: delKey
-  });
-  newPost.save(function(err, newPost) {
-    if(err) return console.log(err);
+  let requestOpts = {
+    url: `https://nominatim.openstreetmap.org/search?format=json&postalcode=${req.body.zipOrPostal}`,
+    method: "GET",
+    headers: {
+      'Accept': 'application/json,text/html,application/xhtml+xml,application/xml,application/xml;q=0.9,*/*;q=0.8',
+      'Accept-Encoding': 'gzip, deflate, br',
+      'Accept-Language': 'en-US,en;q=0.5',
+      'Connection': 'keep-alive',
+      'Host': 'nominatim.openstreetmap.org',
+      'Upgrade-Insecure-Requests': 1,
+      'User-Agent': 'Motospot (node application)'
+    }
+  }
 
-    //send email if no error
-      let transporter = nodemailer.createTransport({
-        host: 'smtp.gmail.com',
-        port: 465,
-        secure: true,
-        auth: {
-          user: process.env.GMAIL_USER,
-          pass: process.env.GMAIL_PASS
-        }
-      });
-      let mailOptions = {
-        from: process.env.GMAIL_USER,
-        to: req.body.email,
-        subject: 'MOTOSPOT Ad confirmation',
-        text: 'Your spot has been posted successfully!',
-        html: `<h2>Thanks ${newPost.fullName} for posting your extra space on Motospot!</h2>
-        <p>Delete your post <a href="http://localhost:3000/del?key=${delKey}">here</a></p>
-        <p> Or click <a href="http://localhost:3000/singlepost?id=${newPost.id}">Here</a> to view your post live!</p>`
-      };
+  request(requestOpts, (err, response, body) => {
+    // #TODO handle error
+    // console.log('error:', err);
+    // console.log('statusCode', response && response.statusCode);
+    lonLat = `[${JSON.parse(body)[0].lon},${JSON.parse(body)[0].lat}]`;
+    newPost = new Post({
+      title: req.body.title,
+      email: req.body.email,
+      fullName: req.body.fullName,
+      description: req.body.description,
+      addressLine1: req.body.addressLine1,
+      addressLine2: req.body.addressLine2,
+      city: req.body.city,
+      stateProvinceRegion: req.body.stateProvinceRegion,
+      zipOrPostal: req.body.zipOrPostal,
+      country: req.body.country,
+      expireAt: expireAt,
+      delKey: delKey,
+      lonLat: lonLat
+    });
 
-      transporter.sendMail(mailOptions, (error, info) => {
-        if(error) {return console.log(error);}
-        console.log('Message sent: %s', info.messageId);
+    newPost.save(function(err, newPost) {
+      if(err) return console.log(err);
 
-      });
+      //send email if no error
+        let transporter = nodemailer.createTransport({
+          host: 'smtp.gmail.com',
+          port: 465,
+          secure: true,
+          auth: {
+            user: process.env.GMAIL_USER,
+            pass: process.env.GMAIL_PASS
+          }
+        });
+        let mailOptions = {
+          from: process.env.GMAIL_USER,
+          to: req.body.email,
+          subject: 'MOTOSPOT Ad confirmation',
+          text: 'Your spot has been posted successfully!',
+          html: `<h2>Thanks ${newPost.fullName} for posting your extra space on Motospot!</h2>
+          <p>Delete your post <a href="http://localhost:3000/del?key=${delKey}">here</a></p>
+          <p> Or click <a href="http://localhost:3000/singlepost?id=${newPost.id}">Here</a> to view your post live!</p>`
+        };
 
-    res.redirect('/singlepost?id=' + newPost.id);
+        transporter.sendMail(mailOptions, (error, info) => {
+          if(error) {return console.log(error);}
+          console.log('Message sent: %s', info.messageId);
+
+        });
+
+      res.redirect('/singlepost?id=' + newPost.id);
+    });
   });
 });
 
@@ -109,36 +133,11 @@ router.get('/singlepost', function(req, res, next) {
         // var formattedDate = moment(post.createdAt).format('MMMM Do, YYYY');
         let formattedDate = moment(post.createdAt).fromNow();
         let title = post.title;
-        let lonLat = ''
-        //request options for http request to nominatim api for reverse geocoding
-        let requestOpts = {
-          url: `https://nominatim.openstreetmap.org/search?format=json&postalcode=${post.zipOrPostal}`,
-          method: "GET",
-          headers: {
-            'Accept': 'application/json,text/html,application/xhtml+xml,application/xml,application/xml;q=0.9,*/*;q=0.8',
-            'Accept-Encoding': 'gzip, deflate, br',
-            'Accept-Language': 'en-US,en;q=0.5',
-            'Connection': 'keep-alive',
-            'Host': 'nominatim.openstreetmap.org',
-            'Upgrade-Insecure-Requests': 1,
-            'User-Agent': 'Motospot (node application)'
-          }
-        }
-
-        request(requestOpts, (err, response, body) => {
-          // console.log('error:', err);
-          // console.log('statusCode', response && response.statusCode);
-          lonLat = `[${JSON.parse(body)[0].lon},${JSON.parse(body)[0].lat}]`;
-          console.log(lonLat);
           res.render('singlepost', {
             post : post,
             postedDate: formattedDate,
-            title: title,
-            //pass the lonLat var here and get to work
-            // '[-122.674510,45.570860]'
-            lonLat: lonLat });
-        });
-
+            title: title
+          });
       } else {
         //#TODO: use nextError() instead of query params
         return res.redirect('/browse?err=true');
