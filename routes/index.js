@@ -1,12 +1,13 @@
-var express = require('express');
-var router = express.Router();
-var mongoose = require('mongoose');
-var moment = require('moment');
-var createError = require('http-errors');
-var nodemailer = require('nodemailer');
+const express = require('express');
+const router = express.Router();
+const mongoose = require('mongoose');
+const moment = require('moment');
+const createError = require('http-errors');
+const nodemailer = require('nodemailer');
+const request = require('request');
 require('dotenv').config()
 //models:
-var Post = mongoose.model('Post');
+const Post = mongoose.model('Post');
 
 
 
@@ -108,21 +109,41 @@ router.get('/singlepost', function(req, res, next) {
         // var formattedDate = moment(post.createdAt).format('MMMM Do, YYYY');
         let formattedDate = moment(post.createdAt).fromNow();
         let title = post.title;
-        // TODO: figure out how to reverse geocode from address to coordinates
-        // and insert it here for the front end js to render the correct map
-        let lonLat = '';
-
+        let lonLat = ''
+        //request options for when we send http request to nominatim api for reverse geocoding
+        let requestOpts = {
+          url: 'https://nominatim.openstreetmap.org/search?format=json&city=Portland&state=Oregon',
+          method: "GET",
+          headers: {
+            'Accept': 'application/json,text/html,application/xhtml+xml,application/xml,application/xml;q=0.9,*/*;q=0.8',
+            'Accept-Encoding': 'gzip, deflate, br',
+            'Accept-Language': 'en-US,en;q=0.5',
+            'Connection': 'keep-alive',
+            'Host': 'nominatim.openstreetmap.org',
+            'Upgrade-Insecure-Requests': 1,
+            'User-Agent': 'Motospot (node application)'
+          }
+        }
+        request(requestOpts, (err, response, body) => {
+          console.log('error:', err);
+          console.log('statusCode', response && response.statusCode);
+          lonLat = `[${JSON.parse(body)[0].lon},${JSON.parse(body)[0].lat}]`;
+          console.log(lonLat);
+        });
 
         res.render('singlepost', {
           post : post,
           postedDate: formattedDate,
           title: title,
+          //pass the lonLat var here and get to work
           lonLat: '[-122.674510,45.570860]'});
       } else {
+        //#TODO: use nextError() instead of query params
         return res.redirect('/browse?err=true');
       }
     });
   } else {
+    //#TODO: use nextError() instead of query params
     return res.redirect('/browse?err=true');
   }
 });
