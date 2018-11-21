@@ -6,4 +6,4 @@ else
   ul
     each post in posts
       - var postId = post._id
-      a(href='singlepost?id=' + postId): li #{post.title}
+      a(href='singlepost?id=' + postId): li #{post.title} | $#{post.price}/MO
