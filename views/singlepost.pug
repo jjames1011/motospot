@@ -10,6 +10,8 @@ block content
   div(class='hideshow')
     p Contact: #{post.fullName}
     p #{post.email}
+    if post.phone
+      p #{post.phone}
     
     
   //- Needs to be in order of button -> div for the hideshow(e) to work

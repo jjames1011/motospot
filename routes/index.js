@@ -51,6 +51,7 @@ router.post('/postaspot', function(req, res, next) {
       title: req.body.title,
       price: req.body.price,
       email: req.body.email,
+      phone: req.body.phone,
       fullName: req.body.fullName,
       description: req.body.description,
       addressLine1: req.body.addressLine1,

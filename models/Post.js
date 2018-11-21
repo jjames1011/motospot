@@ -5,6 +5,7 @@ var postSchema = new mongoose.Schema({
   title: String,
   price: Number,
   email: String,
+  phone: String,
   fullName: String,
   description: String,
   addressLine1: String,
