@@ -8,23 +8,24 @@ h1 Post a Spot:
 div(class='postform')
   form(action='/postaspot' method='post')
     label(for='title') Title of post:
-    input(type='text' value='(eg: Spot in NE!)' name='title' required)
+    input(type='text' placeholder='(eg: Spot in NE!)' name='title' required)
     label(for='price') How much is rent per month?
-    input(type='number' value='50' name='price' required)
+    span $ 
+      input(type='number' placeholder='50' name='price' required)
     label(for='email') Please enter your email: 
-    input(type='email' name='email' value='(eg: john.doe@gmail.com)' required)
+    input(type='email' name='email' placeholder='(eg: john.doe@gmail.com)' required)
       
     
     label(for='fullName') Enter your full name: 
-    input(type='text' name='fullName' value='(eg: John Doe)' required)
+    input(type='text' name='fullName' placeholder='(eg: John Doe)' required)
     label(for='addressLine1') Address Line 1:
-    input(type='text' name='addressLine1' required)
+    input(type='text' name='addressLine1' placeholder='1234 NE Main St' required)
     label(for='addressLine2') Address Line 2:
     input(type='text'  name='addressLine2')
     label(for='city') City:
-    input(type='text' name='city' required)
+    input(type='text' name='city' placeholder='Portland' required)
     label(for='stateProvinceRegion') State / Province / Region:
-    input(type='text' name='stateProvinceRegion' required)
+    input(type='text' name='stateProvinceRegion' placeholder='OR' required)
     label(for='zipOrPostal') ZIP / Postal Code:
     input(type='text' name='zipOrPostal' required)
         
