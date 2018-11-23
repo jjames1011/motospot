@@ -6,7 +6,7 @@ block content
   h1 $#{post.price}/MO | #{post.title}
   p Posted: #{postedDate}
   //- Needs to be in order of button -> div for the hideshow(e) to work
-  button(onClick='hideshow(event);') Contact The poster
+  button(onClick='hideShow(event);') Contact The poster
   div(class='hideshow')
     p Contact: #{post.fullName}
     p #{post.email}
@@ -15,7 +15,7 @@ block content
     
     
   //- Needs to be in order of button -> div for the hideshow(e) to work
-  button(onclick='hideshow(event)') Show address
+  button(onclick='hideShow(event)') Show address
   div(class='hideshow')
     p #{post.addressLine1}
     p #{post.addressLine2}
