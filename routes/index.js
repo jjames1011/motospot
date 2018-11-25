@@ -56,7 +56,7 @@ router.post('/postaspot', function(req, res, next) {
       description: req.body.description,
       addressLine1: req.body.addressLine1,
       addressLine2: req.body.addressLine2,
-      city: req.body.city,
+      city: req.body.city.toLowerCase(),
       stateProvinceRegion: req.body.stateProvinceRegion,
       zipOrPostal: req.body.zipOrPostal,
       country: req.body.country,
@@ -99,33 +99,88 @@ router.post('/postaspot', function(req, res, next) {
   });
 });
 
-//browse spots
 router.get('/browse', function(req, res, next) {
-  //TODO: add search/filter functionality:
-  //Sorting syntax: Model.find({conditions}, {projection(optional fields to return)},
-  // {options: object(sort)}, [callback: function])
-  Post.find({}, null, {sort:{createdAt: -1}},function(err, posts) {
-    if(err) return console.log(err);
-    var title = 'MOTOSPOT || Browse posts';
-    if(posts.length === 0){
-      res.render('main', {
-        title: title,
-        posts: null
-      });
-    } else {
-        if(req.query.err) {
-          res.render('main', {
-            title: title,
-            posts: posts,
-            err: 'Could not find the post you were looking for'
-          });
-        } else {
+    Post.find({}, null, {sort:{createdAt: -1}},function(err, posts) {
+      //Sorting syntax: Model.find({conditions}, {projection(optional fields to return)},
+      // {options: object(sort)}, [callback: function])
+      if(err) return console.log(err);
+      title = 'MOTOSPOT || All Posts';
+      if(posts.length === 0){
+        res.render('main', {
+          title: title,
+          posts: null
+        });
+      } else {
+          if(req.query.err) {
             res.render('main', {
-            title: title,
-            posts: posts});
+              title: title,
+              posts: posts,
+              err: 'Could not find the post you were looking for'
+            });
+          } else {
+              res.render('main', {
+              title: title,
+              posts: posts});
+        }
       }
-    }
-  });
+    });
+});
+
+router.get('/browse/filter', function(req, res, next) {
+  let title;
+  if(req.query.city && req.query.zipOrPostal){
+    Post.find({city: req.query.city.toLowerCase(), zipOrPostal: req.query.zipOrPostal}, null, {sort:{createdAt: -1}},function(err, posts) {
+      //Sorting syntax: Model.find({conditions}, {projection(optional fields to return)},
+      // {options: object(sort)}, [callback: function])
+      console.log(posts +': hit both');
+      if(err) return console.log(err);
+      title = `MOTOSPOT || ${req.query.city} posts`;
+      if(posts.length === 0){
+        res.render('main', {
+          title: title,
+          posts: null
+        });
+      } else {
+              res.render('main', {
+              title: title,
+              posts: posts});
+        }
+    });
+  } else if(req.query.city) {
+    Post.find({city: req.query.city.toLowerCase()}, null, {sort:{createdAt: -1}},function(err, posts) {
+      //Sorting syntax: Model.find({conditions}, {projection(optional fields to return)},
+      // {options: object(sort)}, [callback: function])
+      if(err) return console.log(err);
+      title = `MOTOSPOT || ${req.query.city} posts`;
+      if(posts.length === 0){
+        res.render('main', {
+          title: title,
+          posts: null
+        });
+      } else {
+              res.render('main', {
+              title: title,
+              posts: posts});
+        }
+    });
+  } else if(req.query.zipOrPostal) {
+    Post.find({zipOrPostal: req.query.zipOrPostal}, null, {sort:{createdAt: -1}},function(err, posts) {
+      //Sorting syntax: Model.find({conditions}, {projection(optional fields to return)},
+      // {options: object(sort)}, [callback: function])
+      if(err) return console.log(err);
+      title =  `MOTOSPOT || (${req.query.zipOrPostal}) posts`;
+      if(posts.length === 0){
+        res.render('main', {
+          title: title,
+          posts: null
+        });
+      } else {
+              res.render('main', {
+              title: title,
+              posts: posts});
+        }
+    });
+  }
 });
 
 router.get('/singlepost', function(req, res, next) {
@@ -154,7 +209,6 @@ router.get('/singlepost', function(req, res, next) {
 router.get('/faq', function(req, res, next) {
   res.render('faq', {title: 'MOTOSPOT || FAQ'});
 });
-
 
 router.get('/del', function(req, res, next) {
   if(req.query.key){
