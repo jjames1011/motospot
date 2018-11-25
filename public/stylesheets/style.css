@@ -1,36 +1,57 @@
+/* Base Styles ---- */
+
+
+ /* Main Styles ---- */
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   text-align: center;
 }
+.postform textarea {
+  resize: none;
+}
 
 a {
   color: #00B7FF;
 }
+/* Pseudo-classes ---- */
 
-/* layout styles --------------- */
+
+/* layout styles ---- */
+nav {
+  margin-bottom: 3%;
+}
+.browse {
+  width: 40%;
+  float: right;
+  border: 1px solid black;
+  margin: auto;
+}
 
 label {
   display: block;
 }
+
 input[type='submit'] {
   display: block;
   margin: auto;
 }
 
 button {
-  /* display: block; */
   margin: auto;
 }
+
 nav ul li {
   list-style: none;
   display: inline;
 }
 
 .postform {
-  width: 60%;
+  float: left;
+  width: 40%;
   margin: auto;
-  border: 2px solid black;
+  border: 1px solid black;
+  overflow: auto;
 }
 
 .hideshow {
@@ -42,13 +63,8 @@ nav ul li {
   height: 400px;
 }
 
-/* turns off number spinners */
-input[type='number']::-webkit-inner-spin-button,
-input[type='number']::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-/* for firefox */
-input[type='number'] {
-    -moz-appearance:textfield;
-}
+/* floated Columns ---- */
+
+/* Float Clearfix ---- */
+
+/* Media Queries ---- */
