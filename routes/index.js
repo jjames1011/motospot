@@ -132,8 +132,7 @@ router.get('/browse/filter', function(req, res, next) {
     Post.find({city: req.query.city.toLowerCase(), zipOrPostal: req.query.zipOrPostal}, null, {sort:{createdAt: -1}},function(err, posts) {
       //Sorting syntax: Model.find({conditions}, {projection(optional fields to return)},
       // {options: object(sort)}, [callback: function])
-      console.log(posts +': hit both');
-      if(err) return console.log(err);
+      if(err) return next(createError(err));
       title = `MOTOSPOT || ${req.query.city} posts`;
       if(posts.length === 0){
         res.render('main', {
@@ -150,7 +149,7 @@ router.get('/browse/filter', function(req, res, next) {
     Post.find({city: req.query.city.toLowerCase()}, null, {sort:{createdAt: -1}},function(err, posts) {
       //Sorting syntax: Model.find({conditions}, {projection(optional fields to return)},
       // {options: object(sort)}, [callback: function])
-      if(err) return console.log(err);
+      if(err) return next(createError(err));
       title = `MOTOSPOT || ${req.query.city} posts`;
       if(posts.length === 0){
         res.render('main', {
@@ -167,7 +166,7 @@ router.get('/browse/filter', function(req, res, next) {
     Post.find({zipOrPostal: req.query.zipOrPostal}, null, {sort:{createdAt: -1}},function(err, posts) {
       //Sorting syntax: Model.find({conditions}, {projection(optional fields to return)},
       // {options: object(sort)}, [callback: function])
-      if(err) return console.log(err);
+      if(err) return next(createError(err));
       title =  `MOTOSPOT || (${req.query.zipOrPostal}) posts`;
       if(posts.length === 0){
         res.render('main', {
