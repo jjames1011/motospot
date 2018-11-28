@@ -2,10 +2,13 @@
 
 
  /* Main Styles ---- */
+* {
+  box-sizing: border-box;
+}
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   text-align: center;
+  width: 100%;
 }
 .postform textarea {
   resize: none;
@@ -20,12 +23,13 @@ a {
 /* layout styles ---- */
 nav {
   margin-bottom: 3%;
+  margin-top: 3%;
 }
 .browse {
-  width: 40%;
+  width: 60%;
   float: right;
-  border: 1px solid black;
-  margin: auto;
+  border: 1px dotted black;
+
 }
 
 label {
@@ -37,10 +41,6 @@ input[type='submit'] {
   margin: auto;
 }
 
-button {
-  margin: auto;
-}
-
 nav ul li {
   list-style: none;
   display: inline;
@@ -49,8 +49,7 @@ nav ul li {
 .postform {
   float: left;
   width: 40%;
-  margin: auto;
-  border: 1px solid black;
+  border: 1px dotted black;
   overflow: auto;
 }
 
@@ -59,12 +58,44 @@ nav ul li {
 }
 
 #map {
-  width: 100%;
+  width: 50%;
   height: 400px;
+  margin: auto;
+  margin-bottom: 10%;
 }
 
+.group {
+  margin-left: 10%;
+  margin-right: 10%
+}
 /* floated Columns ---- */
 
 /* Float Clearfix ---- */
-
+.group:after {
+  content: "";
+  display: table;
+  clear: both;
+}
 /* Media Queries ---- */
+@media(max-width: 1024px) {
+  .browse {
+    width: 70%;
+    margin: auto;
+
+  }
+  .postform {
+    width: 30%;
+  }
+  .group {
+    margin: 0;
+  }
+}
+@media(max-width: 768px) {
+  .postform,
+  .browse {
+    width: 100%;
+  }
+  #map {
+    width: 90%;
+  }
+}
