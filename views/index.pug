@@ -1,13 +1,18 @@
 extends layout
 
 block content
-  header
-    h1 Welcome to Motospot!
-    p What would you like to do? 
-    
-  div 
-      a(href="/browse"): input(type='button' value="Post a spot" class="btn")
-      a(href="/browse#browse"): input(type='button' value="Look for a spot" class="btn") 
-      a(href='/faq'): input(type='button' value='How it works' class='btn')
+  body(id='landing-background')
+    include includes/error.pug
+    div(class='main-header')
+      header
+        h1 Welcome to Motospot!
+        p What would you like to do? 
+        
+        a(href='/browse')
+          button(type='button' class='button') Post a spot
+        a(href='/browse#browse')
+          button(type='button' class='button') Seek a spot
+        a(href='/faq')
+          button(type='button' class='button') How it works
   
   

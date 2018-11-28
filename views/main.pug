@@ -1,13 +1,15 @@
 extends layout
 
 block content
-  nav
-    a(href='/') Home 
-    | |
-    a(href='/FAQ') FAQ
-  div(class='group')
-    include includes/postform.pug
-    div(class='browse')
-      h1(id='browse') Browse posts: 
-      include includes/searchForm.pug
-      include includes/browseposts.pug
+  body
+    include includes/error.pug
+    nav
+      a(href='/') Home 
+      | |
+      a(href='/FAQ') FAQ
+    div(class='group')
+      include includes/postform.pug
+      div(class='browse')
+        h1(id='browse') Browse posts: 
+        include includes/searchForm.pug
+        include includes/browseposts.pug

@@ -8,7 +8,41 @@
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   text-align: center;
-  width: 100%;
+  margin: 0;
+  height: 100%;
+}
+.main-header {
+  padding-top: 9rem;
+  height: 100vh;
+}
+.main-header h1 {
+  color: darkgoldenrod;
+  font-size: 10vh;
+  line-height: 1;
+  text-shadow: 10px 5px 15px black;
+}
+.main-header p {
+  color: darkgoldenrod;
+  font-size: 5vh;
+  text-shadow: 10px 5px 20px black;
+  text-decoration: underline;
+}
+.button {
+  background-color: black;
+  text-decoration: none;
+  border: none;
+  color: white;
+  text-align: center;
+  padding: 1.5vh 4vh;
+  margin: 1rem;
+}
+.button:hover {
+  color: darkgoldenrod;
+}
+
+#landing-background {
+  background: url('../images/landing.jpg') no-repeat center;
+  background-size: cover;
 }
 .postform textarea {
   resize: none;
