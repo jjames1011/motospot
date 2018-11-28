@@ -16,18 +16,19 @@ body {
   height: 100vh;
 }
 .main-header h1 {
-  color: darkgoldenrod;
+  color: goldenrod;
   font-size: 10vh;
   line-height: 1;
-  text-shadow: 10px 5px 15px black;
+  text-shadow: 10px 2px 5px black;
 }
 .main-header p {
-  color: darkgoldenrod;
+  color: goldenrod;
   font-size: 5vh;
-  text-shadow: 10px 5px 20px black;
+  text-shadow: 5px 5px 1px black;
   text-decoration: underline;
 }
 .button {
+  font-size: 3vh;
   background-color: black;
   text-decoration: none;
   border: none;
@@ -35,7 +36,13 @@ body {
   text-align: center;
   padding: 1.5vh 4vh;
   margin: 1rem;
+  border-radius: 2px;
 }
+.outline {
+  -webkit-text-stroke-width: .5px;
+  -webkit-text-stroke-color: white;
+}
+
 .button:hover {
   color: darkgoldenrod;
 }
