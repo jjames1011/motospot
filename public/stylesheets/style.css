@@ -1,3 +1,6 @@
+/* Web Fonts ---- */
+@import url('https://fonts.googleapis.com/css?family=Black+Han+Sans');
+
 /* Base Styles ---- */
 
 
@@ -20,6 +23,7 @@ body {
   font-size: 10vh;
   line-height: 1;
   text-shadow: 10px 2px 5px black;
+  font-family: 'Black Han Sans', sans-serif;
 }
 .main-header p {
   color: goldenrod;
@@ -47,9 +51,22 @@ body {
   color: darkgoldenrod;
 }
 
-#landing-background {
-  background: url('../images/landing.jpg') no-repeat center;
+.landing-background {
+  background:
+  linear-gradient(360deg, black 1%, transparent 5%),
+  url('../images/landing.jpg') no-repeat center;
   background-size: cover;
+}
+.faq-background {
+  background:
+    linear-gradient(black 1%, transparent 5%),
+    url('../images/backlit-dark.jpg') no-repeat center;
+  background-size: cover;
+  height: 90vh;
+}
+.faq {
+  padding: 1vh 6vh 1vh 6vh;
+  color: goldenrod;
 }
 .postform textarea {
   resize: none;

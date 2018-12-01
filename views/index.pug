@@ -1,9 +1,9 @@
 extends layout
 
 block content
-  body(id='landing-background')
+  body
     include includes/error.pug
-    div(class='main-header')
+    div(class='main-header landing-background')
       header
         h1 Welcome to Motospot!
         p What would you like to do? 
@@ -12,7 +12,9 @@ block content
           button(type='button' class='button') Post a spot
         a(href='/browse#browse')
           button(type='button' class='button') Seek a spot
-        a(href='/faq')
+        a(href='/#faq')
           button(type='button' class='button') How it works
+    div(class='faq-background faq' id='faq')
+      include includes/faq.pug
   
   
