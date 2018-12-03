@@ -17,16 +17,18 @@ body {
 .main-header {
   padding-top: 9rem;
   height: 100vh;
+  display: block;
+  overflow: auto;
 }
 .main-header h1 {
-  color: goldenrod;
+  color: aqua;
   font-size: 10vh;
   line-height: 1;
   text-shadow: 10px 2px 5px black;
   font-family: 'Black Han Sans', sans-serif;
 }
 .main-header p {
-  color: goldenrod;
+  color: aqua;
   font-size: 5vh;
   text-shadow: 5px 5px 1px black;
   text-decoration: underline;
@@ -48,25 +50,30 @@ body {
 }
 
 .button:hover {
-  color: darkgoldenrod;
+  color: aqua;
 }
 
 .landing-background {
   background:
   linear-gradient(360deg, black 1%, transparent 5%),
-  url('../images/landing.jpg') no-repeat center;
+  url('../images/blue-bike.jpg') no-repeat center;
   background-size: cover;
 }
 .faq-background {
-  background:
-    linear-gradient(black 1%, transparent 5%),
-    url('../images/backlit-dark.jpg') no-repeat center;
+  background: linear-gradient(black 10%, transparent 100%);
+  background-color: aqua;
   background-size: cover;
   height: 90vh;
 }
 .faq {
+  display: block;
   padding: 1vh 6vh 1vh 6vh;
-  color: goldenrod;
+  color: white;
+  overflow: auto;
+}
+.faq h1 {
+  color: aqua;
+  font-family: 'Black Han Sans', sans-serif;
 }
 .postform textarea {
   resize: none;
