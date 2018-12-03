@@ -5,6 +5,9 @@
 
 
  /* Main Styles ---- */
+ html {
+   height: 100%;
+ }
 * {
   box-sizing: border-box;
 }
@@ -13,6 +16,21 @@ body {
   text-align: center;
   margin: 0;
   height: 100%;
+}
+nav {
+  height: 3vh;
+  display: block;
+}
+nav ul li {
+  list-style: none;
+}
+
+#logo {
+  height: 2rem;
+  width: 10rem;
+  float: left;
+  margin-left: 4rem;
+  padding: 0;
 }
 .main-header {
   padding-top: 9rem;
@@ -44,10 +62,10 @@ body {
   margin: 1rem;
   border-radius: 2px;
 }
-.outline {
+/* .outline {
   -webkit-text-stroke-width: .5px;
   -webkit-text-stroke-color: white;
-}
+} */
 
 .button:hover {
   color: aqua;
@@ -59,11 +77,12 @@ body {
   url('../images/blue-bike.jpg') no-repeat center;
   background-size: cover;
 }
-.faq-background {
-  background: linear-gradient(black 50%, transparent 100%);
-  background-color: aqua;
-  background-size: cover;
-  height: 90vh;
+
+.secondary-border {
+  border: 2px solid white;
+  border-radius: 10px;
+  padding: 10px;
+    /* linear-gradient(90deg, black 100%); */
 }
 .faq {
   display: block;
@@ -71,12 +90,30 @@ body {
   color: white;
   overflow: auto;
 }
+.faq-background {
+  background: linear-gradient(black 3%, grey 80%, transparent 150%);
+  background-color: aqua;
+  background-size: cover;
+  height: 90vh;
+}
 .faq h1 {
   color: aqua;
   font-family: 'Black Han Sans', sans-serif;
 }
 .postform textarea {
   resize: none;
+}
+.main {
+  background: linear-gradient( black 5%, transparent 100%),
+  url('../images/blue-bike.jpg') no-repeat center;
+  background-size: cover;
+  background-attachment: fixed;
+  color: white;
+  margin: 0;
+}
+
+.main h1, h2, h3 {
+  color: aqua;
 }
 
 a {
@@ -90,11 +127,14 @@ nav {
   margin-bottom: 3%;
   margin-top: 3%;
 }
+ul {
+  padding: 0;
+}
 .browse {
   width: 60%;
   float: right;
-  border: 1px dotted black;
-
+  border: 2px solid white;
+  border-radius: 5px;
 }
 
 label {
@@ -106,15 +146,11 @@ input[type='submit'] {
   margin: auto;
 }
 
-nav ul li {
-  list-style: none;
-  display: inline;
-}
-
 .postform {
   float: left;
   width: 40%;
-  border: 1px dotted black;
+  border: 2px solid white;
+  border-radius: 5px;
   overflow: auto;
 }
 
@@ -143,10 +179,12 @@ nav ul li {
 }
 /* Media Queries ---- */
 @media(max-width: 1024px) {
+  #logo {
+    padding: 0;
+  }
   .browse {
     width: 70%;
     margin: auto;
-
   }
   .postform {
     width: 30%;
@@ -156,6 +194,11 @@ nav ul li {
   }
 }
 @media(max-width: 768px) {
+  #logo {
+    float: none;
+    margin-left: 0;
+    padding: 0;
+  }
   .postform,
   .browse {
     width: 100%;
