@@ -60,7 +60,7 @@ body {
   background-size: cover;
 }
 .faq-background {
-  background: linear-gradient(black 10%, transparent 100%);
+  background: linear-gradient(black 50%, transparent 100%);
   background-color: aqua;
   background-size: cover;
   height: 90vh;
