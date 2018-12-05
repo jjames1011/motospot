@@ -1,5 +1,22 @@
-/* Web Fonts ---- */
+/* Web Fonts ++ webkit ---- */
 @import url('https://fonts.googleapis.com/css?family=Black+Han+Sans');
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: white;
+  opacity: .8;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: white;
+  opacity: .8;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: white;
+  opacity: .8;
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: white;
+  opacity: .8;
+}
 
 /* Base Styles ---- */
 
@@ -79,7 +96,7 @@ nav ul li {
 }
 
 .secondary-border {
-  border: 2px solid white;
+  border: 2px solid grey;
   border-radius: 10px;
   padding: 10px;
     /* linear-gradient(90deg, black 100%); */
@@ -89,6 +106,7 @@ nav ul li {
   padding: 1vh 6vh 1vh 6vh;
   color: white;
   overflow: auto;
+
 }
 .faq-background {
   background: linear-gradient(black 3%, grey 80%, transparent 150%);
@@ -116,8 +134,34 @@ nav ul li {
   color: aqua;
 }
 
-a {
-  color: #00B7FF;
+.browse a {
+  color: white;
+  text-decoration: underline
+}
+
+.browse a:visited {
+  color: #9A399A;
+}
+
+input[type='text'],
+input[type='email'],
+input[type='tel'],
+input[type='number']{
+  border: 1px solid white;
+  border-radius: 6px;
+  color: white;
+  font-weight: bold;
+  font-size: 1.2rem;
+  background-color: transparent;
+  width: 15rem;
+  height: 1.5rem;
+}
+
+textarea {
+  border-radius: 6px;
+  background-color: transparent;
+  color: white;
+  font-weight: bold;
 }
 /* Pseudo-classes ---- */
 
@@ -131,10 +175,10 @@ ul {
   padding: 0;
 }
 .browse {
-  width: 60%;
+  width: 50%;
   float: right;
-  border: 2px solid white;
-  border-radius: 5px;
+
+  /* border-radius: 5px; */
 }
 
 label {
@@ -144,14 +188,22 @@ label {
 input[type='submit'] {
   display: block;
   margin: auto;
+  margin-top: 1rem;
+  padding: .5rem 1rem;
+  background-color: black;
+  color: aqua;
+  font-family: 'Black Han Sans', sans-serif;
+  border: 1px solid white;
+  border-radius: 5px;
 }
 
 .postform {
   float: left;
-  width: 40%;
-  border: 2px solid white;
-  border-radius: 5px;
+  width: 50%;
+  border-right: 2px solid white;
+  /* border-radius: 5px; */
   overflow: auto;
+
 }
 
 .hideshow {
@@ -168,6 +220,15 @@ input[type='submit'] {
 .group {
   margin-left: 10%;
   margin-right: 10%
+}
+footer {
+  width: 100%;
+  margin: auto;
+  background-color: aqua;
+}
+
+footer p {
+  float: right;
 }
 /* floated Columns ---- */
 
