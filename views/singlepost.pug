@@ -10,9 +10,10 @@ block content
     h1 $#{post.price}/MO | #{post.title}
     p Posted: #{postedDate}
       
-    p 
-      em Description: 
-      | #{post.description}
+    div(class='description')
+      p 
+        em Description: 
+        | #{post.description}
       
     div(id='map')
     

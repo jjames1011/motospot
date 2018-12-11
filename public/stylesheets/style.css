@@ -205,6 +205,11 @@ ul {
   /* border-radius: 5px; */
 }
 
+.description {
+  text-align: center;
+  width: 80vw;
+  margin: auto;
+}
 label {
   display: block;
 }
