@@ -22,7 +22,7 @@
 
 
  /* Main Styles ---- */
- html {
+html {
    height: 100%;
  }
 * {
@@ -160,12 +160,25 @@ nav ul li {
 
 .browse a {
   color: white;
-  text-decoration: underline
+}
+
+.browse li:hover {
+  color: aqua;
+  border-color: aqua;
+}
+.browse-list a {
+  text-decoration: none;
+  list-style: none;
 }
 
 .browse a:visited {
-  color: #9A399A;
+  color: Fuchsia;
 }
+
+.browse-list {
+  font-size: 1.2rem
+}
+
 
 input[type='text'],
 input[type='email'],
@@ -195,14 +208,8 @@ nav {
   margin-bottom: 3%;
   margin-top: 3%;
 }
-ul {
+nav ul {
   padding: 0;
-}
-.browse {
-  width: 50%;
-  float: right;
-
-  /* border-radius: 5px; */
 }
 
 .description {
@@ -226,16 +233,21 @@ input[type='submit'] {
   border-radius: 5px;
 }
 
-.postform {
-  float: left;
-  width: 50%;
-  border-right: 2px solid white;
-  /* border-radius: 5px; */
-  overflow: auto;
+
+.browse-list li {
+  /* line-height: 5vh; */
+  /* height: 5vh; */
+  margin: auto;
+  margin-top: 1vh;
+  /* position: relative; */
+  border: 1px solid white;
+  border-radius: 5px;
+  /* width: 50vw; */
 }
 
+
 .hideshow {
-  border: 1px solid grey;
+  border: 1px solid aqua;
   font-family: 'Black Han Sans', sans-serif;
   border-radius: 5px;
   background-color: rgba(64,64,64, 0.8);
@@ -258,7 +270,7 @@ input[type='submit'] {
 
 .group {
   margin-left: 10%;
-  margin-right: 10%
+  margin-right: 10%;
 }
 footer {
   width: 100%;
@@ -266,11 +278,27 @@ footer {
   background-color: aqua;
 }
 
+
+/* floated Columns ---- */
+
+.postform {
+  float: left;
+  width: 50%;
+  border-right: 2px solid white;
+  /* border-radius: 5px; */
+  overflow: auto;
+}
+
+.browse {
+  width: 50%;
+  float: right;
+  text-align: center;
+  margin: auto;
+}
+
 footer p {
   float: right;
 }
-/* floated Columns ---- */
-
 /* Float Clearfix ---- */
 .group:after {
   content: "";
@@ -283,11 +311,16 @@ footer p {
     padding: 0;
   }
   .browse {
-    width: 70%;
+    width: 70vw;
     margin: auto;
   }
+  .browse-list {
+    width: 70vh;
+    margin: auto;
+  }
+
   .postform {
-    width: 30%;
+    width: 30vw;
   }
   .group {
     margin: 0;

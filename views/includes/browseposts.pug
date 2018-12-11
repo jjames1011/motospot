@@ -2,7 +2,7 @@
 if !posts
   p Sorry there are currently no posts. Feel free to add one!
 else
-  ul
+  ul(class='browse-list')
     each post in posts
       - var postId = post._id
-      a(href='/singlepost?id=' + postId): li #{post.title} | $#{post.price}/MO
+        a(href='/singlepost?id=' + postId): li #{post.title} | $#{post.price}/MO
