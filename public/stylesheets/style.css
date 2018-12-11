@@ -232,11 +232,20 @@ input[type='submit'] {
   border-right: 2px solid white;
   /* border-radius: 5px; */
   overflow: auto;
-
 }
 
 .hideshow {
+  border: 1px solid grey;
+  font-family: 'Black Han Sans', sans-serif;
+  border-radius: 5px;
+  background-color: rgba(64,64,64, 0.8);
   display: none;
+  color: white;
+  font-size: 4vh;
+  height: 35vh;
+  width: 80vw;
+  margin: auto;
+  overflow: auto;
 }
 
 #map {
