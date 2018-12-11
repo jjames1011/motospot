@@ -1,43 +1,47 @@
 extends layout
 
 block content
-  nav 
-    a(href='/browse') <-- back
-  h1 $#{post.price}/MO | #{post.title}
-  p Posted: #{postedDate}
-  //- Needs to be in order of button -> div for the hideshow(e) to work
-  button(onClick='hideShow(event);') Contact The poster
-  div(class='hideshow')
-    p Contact: #{post.fullName}
-    p #{post.email}
-    if post.phone
-      p #{post.phone}
+  body(class='main')
+    nav
+      ul
+        li 
+          a(href='/')
+            img(src='images/logo.png' id='centered-logo')
+    h1 $#{post.price}/MO | #{post.title}
+    p Posted: #{postedDate}
+      
+    p 
+      em Description: 
+      | #{post.description}
+      
+    div(id='map')
     
-    
-  //- Needs to be in order of button -> div for the hideshow(e) to work
-  button(onclick='hideShow(event)') Show address
-  div(class='hideshow')
-    p #{post.addressLine1}
-    p #{post.addressLine2}
-    p #{post.city + ', ' + post.stateProvinceRegion + ' ' + post.zipOrPostal}
-    
-  p 
-    em Description: 
-    | #{post.description}
-    
-  div(id='map')
-    
-  script.
-        var map = new ol.Map({
-        target: 'map',
-        layers: [
-        new ol.layer.Tile({
-        source: new ol.source.OSM()
-        })
-        ],
-        view: new ol.View({
-        center: ol.proj.fromLonLat(#{post.lonLat}),
-        zoom: 13
-        })
-        });
+    //- Needs to be in order of button -> div for the hideshow(e) to work
+    button(onClick='hideShow(event)' class='contact-button') Contact The poster
+    div(class='hideshow')
+      p Contact: #{post.fullName}
+      p #{post.email}
+      if post.phone
+        p #{post.phone}
+        
+    //- Needs to be in order of button -> div for the hideshow(e) to work
+    button(onclick='hideShow(event)' class='contact-button') Show address
+    div(class='hideshow')
+      p #{post.addressLine1}
+      p #{post.addressLine2}
+      p #{post.city + ', ' + post.stateProvinceRegion + ' ' + post.zipOrPostal}
+      
+    script.
+          var map = new ol.Map({
+          target: 'map',
+          layers: [
+          new ol.layer.Tile({
+          source: new ol.source.OSM()
+          })
+          ],
+          view: new ol.View({
+          center: ol.proj.fromLonLat(#{post.lonLat}),
+          zoom: 13
+          })
+          });
         

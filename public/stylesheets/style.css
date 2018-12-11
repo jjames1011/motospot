@@ -49,6 +49,12 @@ nav ul li {
   margin-left: 4rem;
   padding: 0;
 }
+#centered-logo {
+  height: 2rem;
+  width: 10rem;
+  padding: 0;
+  text-align: center;
+}
 .main-header {
   padding-top: 9rem;
   height: 100vh;
@@ -68,7 +74,7 @@ nav ul li {
   text-shadow: 5px 5px 1px black;
   text-decoration: underline;
 }
-.button {
+.landing-button {
   font-size: 3vh;
   background-color: black;
   text-decoration: none;
@@ -79,13 +85,31 @@ nav ul li {
   margin: 1rem;
   border-radius: 2px;
 }
+.contact-button {
+  font-size: 2vh;
+  background-color: transparent;
+  text-decoration: none;
+  border: 1px solid white;
+  color: white;
+  text-align: center;
+  /* padding: 1.5vh 4vh; */
+  margin: 1rem;
+  border-radius: 2px;
+  height: 4vh;
+  width: 25vw;
+  overflow: hidden;
+  white-space: nowrap;
+}
 /* .outline {
   -webkit-text-stroke-width: .5px;
   -webkit-text-stroke-color: white;
 } */
 
-.button:hover {
+.landing-button:hover {
   color: aqua;
+}
+.contact-button:hover {
+  border: 1px solid aqua;
 }
 
 .landing-background {
@@ -211,10 +235,11 @@ input[type='submit'] {
 }
 
 #map {
-  width: 50%;
+  width: 50vw;
   height: 400px;
   margin: auto;
-  margin-bottom: 10%;
+  border: 3px solid aqua;
+  border-radius: 5px;
 }
 
 .group {
