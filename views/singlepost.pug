@@ -32,6 +32,7 @@ block content
       p #{post.addressLine2}
       p #{post.city + ', ' + post.stateProvinceRegion + ' ' + post.zipOrPostal}
       
+    include includes/footer.pug
     script.
           var map = new ol.Map({
           target: 'map',
