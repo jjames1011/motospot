@@ -42,6 +42,18 @@ nav ul li {
   list-style: none;
 }
 
+footer {
+  color: white;
+}
+footer a {
+  text-decoration: none;
+  color: white;
+}
+footer a:hover {
+  text-decoration: underline;
+}
+
+
 #logo {
   height: 2rem;
   width: 10rem;
@@ -275,8 +287,13 @@ input[type='submit'] {
 footer {
   width: 100%;
   margin: auto;
-  background-color: aqua;
+  padding-top: 5vh;
 }
+footer p {
+  display: inline;
+  padding-left: 1vw;
+}
+
 
 
 /* floated Columns ---- */
@@ -297,7 +314,7 @@ footer {
 }
 
 footer p {
-  float: right;
+
 }
 /* Float Clearfix ---- */
 .group:after {
