@@ -147,8 +147,6 @@ router.get('/browse/filter', function(req, res, next) {
     });
   } else if(req.query.city) {
     Post.find({city: req.query.city.toLowerCase()}, null, {sort:{createdAt: -1}},function(err, posts) {
-      //Sorting syntax: Model.find({conditions}, {projection(optional fields to return)},
-      // {options: object(sort)}, [callback: function])
       if(err) return next(createError(err));
       title = `MOTOSPOT || ${req.query.city} posts`;
       if(posts.length === 0){
@@ -164,8 +162,6 @@ router.get('/browse/filter', function(req, res, next) {
     });
   } else if(req.query.zipOrPostal) {
     Post.find({zipOrPostal: req.query.zipOrPostal}, null, {sort:{createdAt: -1}},function(err, posts) {
-      //Sorting syntax: Model.find({conditions}, {projection(optional fields to return)},
-      // {options: object(sort)}, [callback: function])
       if(err) return next(createError(err));
       title =  `MOTOSPOT || (${req.query.zipOrPostal}) posts`;
       if(posts.length === 0){
@@ -179,6 +175,9 @@ router.get('/browse/filter', function(req, res, next) {
               posts: posts});
         }
     });
+  } else {
+      title = `MOTOSPOT || Browse Spots`;
+      res.redirect('/browse')
   }
 });
 
