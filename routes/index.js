@@ -43,8 +43,7 @@ router.post('/postaspot', function(req, res, next) {
   }
 
   request(requestOpts, (err, response, body) => {
-    // #TODO handle error
-    // console.log('error:', err);
+    if(err) next(createError(err));
     // console.log('statusCode', response && response.statusCode);
     lonLat = `[${JSON.parse(body)[0].lon},${JSON.parse(body)[0].lat}]`;
     newPost = new Post({
