@@ -17,7 +17,7 @@
   color: white;
   opacity: .8;
 }
-/* Gets rid of number spinners */ 
+/* Gets rid of number spinners */
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
@@ -323,9 +323,6 @@ footer p {
   margin: auto;
 }
 
-footer p {
-
-}
 /* Float Clearfix ---- */
 .group:after {
   content: "";
