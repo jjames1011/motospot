@@ -1,8 +1,17 @@
 extends layout 
 
 block content 
-  nav
-    a(href='/') Home 
-    | |
-    a(href='/#FAQ') FAQ
-  h2 #{message}
+  body(class='main')
+    nav
+      ul
+        li 
+          a(href='/')
+            img(src='../images/logo.png' id='logo')
+    
+    h2(class='deleted') #{message}
+    a(href='../browse')
+      button(type='button' class='landing-button' id='delete-pg-btn') Browse Spots
+    a(href='../#faq')
+      button(type='button' class='landing-button' id='delete-pg-btn') FAQ
+      
+    include includes/footer.pug

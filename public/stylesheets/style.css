@@ -289,6 +289,16 @@ input[type='submit'] {
   border-radius: 5px;
 }
 
+.deleted {
+  margin-top: 30vh;
+  font-size: 2.5rem;
+}
+
+#delete-pg-btn {
+  border: 2px solid white;
+  width: 25vw;
+}
+
 .group {
   margin-left: 10%;
   margin-right: 10%;

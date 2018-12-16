@@ -214,7 +214,7 @@ router.get('/del', function(req, res, next) {
       if (post.n === 0){
         res.render('deleted', {
           title: 'MOTOSPOT || Delete Post',
-          message: 'This post has already been deleted'
+          message: 'This post has already been deleted!'
         });
       } else {
         res.render('deleted', {
@@ -224,7 +224,7 @@ router.get('/del', function(req, res, next) {
       }
     });
   } else {
-    return next(createError(500));
+    return res.redirect('/');
   }
 });
 
