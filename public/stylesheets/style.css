@@ -166,7 +166,7 @@ footer a:hover {
 }
 
 .faq-background {
-  background: linear-gradient(black 3%, grey 80%, transparent 150%);
+  background: linear-gradient(black 3%, grey 50%, transparent 150%);
   background-color: aqua;
   background-size: cover;
 }
@@ -333,9 +333,9 @@ input[type='submit'] {
   background-color: rgba(64,64,64, 0.8);
   display: none;
   color: white;
-  font-size: 4vh;
-  height: 35vh;
-  width: 80vw;
+  font-size: 2vh;
+  height: 20vh;
+  width: 50vw;
   margin: auto;
   overflow: auto;
 }
