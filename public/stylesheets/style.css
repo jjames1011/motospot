@@ -144,7 +144,7 @@ footer a:hover {
   border: .5px solid grey;
   border-radius: 10px;
   padding: 10px;
-  
+
     /* linear-gradient(90deg, black 100%); */
 }
 .secondary-border a:visited {
@@ -345,6 +345,12 @@ footer {
   margin: auto;
   padding-top: 5vh;
   padding-bottom: 2vh;
+  border-top: 1px solid grey;
+}
+.footer {
+  width: 80%;
+  margin: auto;
+  margin-top: 2vh;
 }
 footer p {
   display: inline;
