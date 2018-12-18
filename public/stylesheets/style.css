@@ -190,7 +190,7 @@ footer a:hover {
 }
 .main {
   background: linear-gradient( black 5%, transparent 100%),
-  url('../images/blue-bike.jpg') no-repeat center;
+  url('../images/bluebike2.jpg') no-repeat center;
   background-size: cover;
   background-attachment: fixed;
   color: white;
@@ -270,6 +270,17 @@ nav ul {
   background-size: 50vh 40vh;
 }
 
+.garage {
+  height: 40vh;
+  width: 60vh;
+  border: 1px solid aqua;
+  border-radius: 3px;
+}
+
+.singlepost {
+  height: 40vh;
+  width: 40vh;
+}
 .description {
   text-align: center;
   width: 80vw;
