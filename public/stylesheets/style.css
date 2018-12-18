@@ -143,6 +143,9 @@ footer a:hover {
 .secondary-content h1 {
   text-shadow: 1.5px 1.5px black;
 }
+.secondary-content p {
+  font-size: 1rem;
+}
 .secondary-border {
   border: .5px solid grey;
   border-radius: 10px;
