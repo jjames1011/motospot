@@ -155,7 +155,7 @@ footer a:hover {
 .secondary-border a:visited {
   color: aqua;
 }
-#secondary-bg-image {
+.secondary-bg-image {
   background:
   linear-gradient(black 1%, transparent 25%),
   url('../images/roadbike.jpg') no-repeat center;
