@@ -9,12 +9,12 @@ block content
         p What would you like to do? 
         
         a(href='/browse')
-          button(type='button' class='landing-button') Post a spot
-        a(href='/browse#browse')
-          button(type='button' class='landing-button') Seek a spot
-        a(href='/#faq')
+          button(type='button' class='landing-button') Post/Seek a spot
+        a(href='/#howitworks')
           button(type='button' class='landing-button') How it works
-    div(class='faq-background faq')
+        a(href='/#faq')
+          button(type='button' class='landing-button') FAQ
+    div(class='faq-background faq' id='howitworks')
       include includes/faq.pug
       include includes/footer.pug
       

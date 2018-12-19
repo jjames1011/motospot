@@ -96,15 +96,17 @@ footer a:hover {
   text-decoration: underline;
 }
 .landing-button {
-  font-size: 3vh;
+  font-size: 2vw;
   background-color: black;
   text-decoration: none;
   border: none;
   color: white;
   text-align: center;
-  padding: 1.5vh 4vh;
+   padding: 1.5vh 2vh;
   margin: 1rem;
   border-radius: 2px;
+  width: 25vw;
+  white-space: nowrap;
 }
 .contact-button {
   font-size: 2vh;
@@ -273,7 +275,6 @@ nav ul {
   height: 50vh;
   background:
     url('../images/pinnedMap.png') no-repeat 50% 50% / 60vh 60vh;
-  /* background-size: 50vh 40vh; */
 }
 
 .garage {
@@ -429,13 +430,7 @@ footer p {
   }
 }
 @media(max-width: 768px) {
-  .image-container {
-    background:
-      url('../images/home.jpg') no-repeat 80% 100%,
-      url('../images/map.png') no-repeat  10% 10%;
-    ;
-    background-size: 50vh 40vh;
-  }
+
   #logo {
     float: none;
     margin-left: 0;
