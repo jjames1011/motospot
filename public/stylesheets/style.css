@@ -248,7 +248,7 @@ input[type='number']{
 
 textarea {
   border-radius: 6px;
-  border: 3px solid white;
+  border: 1px solid white;
   background-color: rgba(0,0,0,.5);
   color: white;
   font-weight: bold;
