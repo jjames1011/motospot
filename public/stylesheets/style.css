@@ -70,6 +70,7 @@ footer a:hover {
   margin-left: 4rem;
   padding: 0;
 }
+
 #centered-logo {
   height: 2rem;
   width: 10rem;
@@ -196,8 +197,9 @@ footer a:hover {
   resize: none;
 }
 .main {
-  background: linear-gradient( black 5%, transparent 100%),
-  url('../images/bluebike2.jpg') no-repeat center;
+  background:
+    linear-gradient(black 10%, transparent 80%),
+    url('../images/bluebike2.jpg') no-repeat center;
   background-size: cover;
   background-attachment: fixed;
   color: white;
@@ -239,14 +241,15 @@ input[type='number']{
   color: white;
   font-weight: bold;
   font-size: 1.2rem;
-  background-color: transparent;
+  background-color: rgba(0,0,0,.5);
   width: 15rem;
   height: 1.5rem;
 }
 
 textarea {
   border-radius: 6px;
-  background-color: transparent;
+  border: 3px solid white;
+  background-color: rgba(0,0,0,.5);
   color: white;
   font-weight: bold;
 }
@@ -327,6 +330,7 @@ input[type='submit'] {
   border: 1px solid white;
   border-radius: 5px;
   /* width: 50vw; */
+  background-color: rgba(0,0,0,.5);
 }
 
 
