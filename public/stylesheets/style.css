@@ -103,11 +103,12 @@ footer a:hover {
   border: none;
   color: white;
   text-align: center;
-   padding: 1.5vh 2vh;
+  padding: 1.5vh 2vh;
   margin: 1rem;
-  border-radius: 2px;
+  border-radius: 5px;
   width: 25vw;
   white-space: nowrap;
+  height: 6vh;
 }
 .contact-button {
   font-size: 2vh;
@@ -131,6 +132,7 @@ footer a:hover {
 
 .landing-button:hover {
   color: aqua;
+  border: 1px solid aqua;
 }
 .contact-button:hover {
   border: 1px solid aqua;
