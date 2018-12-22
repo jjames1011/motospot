@@ -7,13 +7,13 @@ block content
       header
         h1 Welcome to Motospot!
         p What would you like to do? 
-        
-        a(href='/browse')
-          button(type='button' class='landing-button') Post/Seek a spot
-        a(href='/#howitworks')
-          button(type='button' class='landing-button') How it works
-        a(href='/#faq')
-          button(type='button' class='landing-button') FAQ
+        div(id='landing-buttons')
+          a(href='/browse')
+            button(type='button' class='landing-button') Post/Seek a spot
+          a(href='/#howitworks')
+            button(type='button' class='landing-button') How it works
+          a(href='/#faq')
+            button(type='button' class='landing-button') FAQ
     div(class='faq-background faq' id='howitworks')
       include includes/faq.pug
       include includes/footer.pug
