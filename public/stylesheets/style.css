@@ -1,5 +1,6 @@
 /* Web Fonts ++ webkit ---- */
 @import url('https://fonts.googleapis.com/css?family=Black+Han+Sans');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
 
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
   color: white;
@@ -120,7 +121,6 @@ footer a:hover {
   border: 1px solid white;
   color: white;
   text-align: center;
-  /* padding: 1.5vh 4vh; */
   margin: 1rem;
   border-radius: 2px;
   height: 4vh;
@@ -128,10 +128,6 @@ footer a:hover {
   overflow: hidden;
   white-space: nowrap;
 }
-/* .outline {
-  -webkit-text-stroke-width: .5px;
-  -webkit-text-stroke-color: white;
-} */
 
 .landing-button:hover {
   color: aqua;
@@ -150,14 +146,18 @@ footer a:hover {
 
 .secondary-content h1 {
   text-shadow: 1.5px 1.5px black;
+  color: aqua;
+  font-family: 'Black Han Sans', sans-serif;
 }
 .secondary-content p {
-  font-size: 1rem;
+  font-size: 1.25rem;
+  font-family: 'Open Sans', sans-serif;
 }
 .secondary-border {
   border: .5px solid grey;
   border-radius: 10px;
   padding: 10px;
+  box-shadow: 10px 10px 50px black;
 }
 
 .secondary-border a:visited {
@@ -177,17 +177,11 @@ footer a:hover {
 }
 
 .faq-background {
-  background: linear-gradient(black 3%, grey 50%, transparent 150%);
+  background: linear-gradient(black 3%, dimgrey 50%, transparent 150%);
   background-color: aqua;
   background-size: cover;
 }
-.faq h1 {
-  color: aqua;
-  font-family: 'Black Han Sans', sans-serif;
-}
-.secondary-border p {
-  font-size: 1rem;
-}
+
 .secondary-border h2, h3 {
   color: aqua;
   text-shadow: 1.5px 1.5px black;
@@ -270,11 +264,6 @@ nav ul {
   padding: 0;
 }
 
-
-.secondary-border {
-  margin-bottom: 10vh;
-  box-shadow: 10px 10px 50px black;
-}
 .secondary-content {
   margin-bottom: 10vh;
 }
@@ -327,14 +316,10 @@ input[type='submit'] {
 
 
 .browse-list li {
-  /* line-height: 5vh; */
-  /* height: 5vh; */
   margin: auto;
   margin-top: 1vh;
-  /* position: relative; */
   border: 1px solid white;
   border-radius: 5px;
-  /* width: 50vw; */
   background-color: rgba(0,0,0,.5);
 }
 
