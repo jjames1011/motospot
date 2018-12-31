@@ -6,3 +6,7 @@ else
     each post in posts
       - var postId = post._id
         a(href='/singlepost?id=' + postId): li #{post.title} | $#{post.price}/MO
+  if nextLink
+    a(href='/browse?page=' + nextLink): p Next Page
+  if prevLink
+    a(href='/browse?page=' + prevLink): p Prev Page 
