@@ -99,30 +99,29 @@ router.post('/postaspot', function(req, res, next) {
 });
 
 router.get('/browse', function(req, res, next) {
-    Post.find({}, null, {sort:{createdAt: -1}},function(err, posts) {
-      //Sorting syntax: Model.find({conditions}, {projection(optional fields to return)},
-      // {options: object(sort)}, [callback: function])
-      if(err) return console.log(err);
-      title = 'MOTOSPOT || All Posts';
-      if(posts.length === 0){
-        res.render('main', {
-          title: title,
-          posts: null
-        });
-      } else {
-          if(req.query.err) {
-            res.render('main', {
-              title: title,
-              posts: posts,
-              err: 'Could not find the post you were looking for'
-            });
-          } else {
-              res.render('main', {
-              title: title,
-              posts: posts});
+  if(!req.query.page){
+      res.redirect('/browse?page=1')
+    } else {
+      let skipAmount = req.query.page*15-15;
+      Post.find({},null,{sort:{createdAt: -1}, limit: 15, skip: skipAmount},function(err, posts) {
+        title = 'MOTOSPOT || All Posts';
+        if(posts.length === 0){
+          res.redirect(`/browse?page=${req.query.page-1}`)
+        } else {
+          //left off trying to determin if there is going to be a next set of search results to either include or ommit the 'nextLink'...
+          let nextLink;
+          let nextPosts;
+
+
+          res.render('main', {
+            title: title,
+            posts: posts,
+            nextLink: Number(req.query.page) + 1,
+            prevLink: Number(req.query.page) - 1
+          })
         }
-      }
-    });
+      });
+    }
 });
 
 router.get('/browse/filter', function(req, res, next) {
