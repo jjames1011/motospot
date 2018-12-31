@@ -106,12 +106,16 @@ router.get('/browse', function(req, res, next) {
       Post.find({},null,{sort:{createdAt: -1}, limit: 15, skip: skipAmount},function(err, posts) {
         title = 'MOTOSPOT || All Posts';
         if(posts.length === 0){
-          res.redirect(`/browse?page=${req.query.page-1}`)
+          res.render('main', {
+            title: title,
+            posts: null,
+            nextLink: null,
+            prevLink: Number(req.query.page) - 1
+          })
         } else {
           //left off trying to determin if there is going to be a next set of search results to either include or ommit the 'nextLink'...
           let nextLink;
           let nextPosts;
-
 
           res.render('main', {
             title: title,
