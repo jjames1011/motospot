@@ -111,18 +111,27 @@ router.get('/browse', function(req, res, next) {
             posts: null,
             nextLink: null,
             prevLink: Number(req.query.page) - 1
-          })
+          });
         } else {
-          //left off trying to determin if there is going to be a next set of search results to either include or ommit the 'nextLink'...
-          let nextLink;
-          let nextPosts;
-
-          res.render('main', {
-            title: title,
-            posts: posts,
-            nextLink: Number(req.query.page) + 1,
-            prevLink: Number(req.query.page) - 1
-          })
+          let currentPosts = posts;
+          //Hit the db again to check if there are posts on next page to either omit or include 'next page' button...
+          Post.find({},null,{sort: {createdAt: -1}, limit: 15, skip: skipAmount + 15}, function(err, nextPosts) {
+              if(nextPosts.length === 0){
+                res.render('main', {
+                  title: title,
+                  posts: currentPosts,
+                  nextLink: null,
+                  prevLink: Number(req.query.page) - 1
+                });
+              } else {
+                res.render('main', {
+                  title: title,
+                  posts: currentPosts,
+                  nextLink: Number(req.query.page) + 1,
+                  prevLink: Number(req.query.page) - 1
+                });
+              }
+          });
         }
       });
     }
