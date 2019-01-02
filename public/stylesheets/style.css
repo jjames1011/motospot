@@ -129,6 +129,16 @@ footer a:hover {
   white-space: nowrap;
 }
 
+.pagBtn {
+  display: inline-block;
+  padding: .5rem 1rem;
+  background-color: black;
+  color: aqua;
+  font-family: 'Black Han Sans', sans-serif;
+  border: 1px solid white;
+  border-radius: 5px;
+}
+
 .landing-button:hover {
   color: aqua;
   border: 1px solid aqua;
@@ -212,6 +222,7 @@ footer a:hover {
 
 .browse a {
   color: white;
+  text-decoration: none;
 }
 
 .browse li:hover {
