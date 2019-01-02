@@ -151,9 +151,9 @@ router.get('/browse/filter', function(req, res, next) {
           posts: null
         });
       } else {
-              res.render('main', {
-              title: title,
-              posts: posts});
+          res.render('main', {
+          title: title,
+          posts: posts});
         }
     });
   } else if(req.query.city) {
