@@ -99,97 +99,87 @@ router.post('/postaspot', function(req, res, next) {
 });
 
 router.get('/browse', function(req, res, next) {
-  if(!req.query.page){
-      res.redirect('/browse?page=1')
+  let dbSearchFilters = {};
+  let skipAmount, page, city, zipOrPostal, title;
+
+  //set search filters from query strings
+  //keep track of the filters[page, zipOrPostal] for 'next page' and
+  //'prev page' links
+  if(req.query.city && req.query.zipOrPostal){
+    city = req.query.city;
+    zipOrPostal = req.query.zipOrPostal;
+    title = `MOTOSPOT || ${city} posts`;
+    dbSearchFilters = {
+      city: req.query.city.toLowerCase(),
+      zipOrPostal: req.query.zipOrPostal
+    };
+  } else if (req.query.city){
+    city = req.query.city;
+    zipOrPostal = '';
+    title = `MOTOSPOT || ${city} Posts`;
+    dbSearchFilters = {
+      city: req.query.city.toLowerCase()
+    }
+  } else if (req.query.zipOrPostal) {
+    zipOrPostal = req.query.zipOrPostal;
+    city = '';
+    title = `MOTOSPOT || ${zipOrPostal} Posts`;
+    dbSearchFilters = {
+      zipOrPostal: req.query.zipOrPostal
+    }
+  } else {
+    city = '';
+    zipOrPostal = '';
+    title = 'MOTOSPOT || All Posts'
+  }
+  //if not a page query string assume client wants page 1
+  if(!req.query.page) {
+    page = 1;
+  } else {
+    page = req.query.page;
+  }
+
+  //calc how many results to skip for db query[for pagination]
+   skipAmount = page*15-15;
+
+
+  Post.find(dbSearchFilters,null,{sort:{createdAt: -1}, limit: 15, skip: skipAmount},function(err, posts) {
+
+    if(posts.length === 0){
+      res.render('main', {
+        title: title,
+        posts: null,
+        city: city,
+        zipOrPostal: zipOrPostal,
+        nextLink: null,
+        prevLink: Number(page) - 1
+      });
     } else {
-      let skipAmount = req.query.page*15-15;
-      Post.find({},null,{sort:{createdAt: -1}, limit: 15, skip: skipAmount},function(err, posts) {
-        title = 'MOTOSPOT || All Posts';
-        if(posts.length === 0){
-          res.render('main', {
-            title: title,
-            posts: null,
-            nextLink: null,
-            prevLink: Number(req.query.page) - 1
-          });
-        } else {
-          let currentPosts = posts;
-          //Hit the db again to check if there are posts on next page to either omit or include 'next page' button...
-          Post.find({},null,{sort: {createdAt: -1}, limit: 15, skip: skipAmount + 15}, function(err, nextPosts) {
-              if(nextPosts.length === 0){
-                res.render('main', {
-                  title: title,
-                  posts: currentPosts,
-                  nextLink: null,
-                  prevLink: Number(req.query.page) - 1
-                });
-              } else {
-                res.render('main', {
-                  title: title,
-                  posts: currentPosts,
-                  nextLink: Number(req.query.page) + 1,
-                  prevLink: Number(req.query.page) - 1
-                });
-              }
-          });
-        }
+      let currentPosts = posts;
+      //Hit the db again to check if there are posts on next page to either omit or include 'next page' button...
+      Post.find(dbSearchFilters,null,{sort: {createdAt: -1}, limit: 15, skip: skipAmount + 15}, function(err, nextPosts) {
+          if(nextPosts.length === 0){
+            res.render('main', {
+              title: title,
+              posts: currentPosts,
+              city: city,
+              zipOrPostal: zipOrPostal,
+              nextLink: null,
+              prevLink: Number(page) - 1
+            });
+          } else {
+            res.render('main', {
+              title: title,
+              posts: currentPosts,
+              city: city,
+              zipOrPostal: zipOrPostal,
+              nextLink: Number(page) + 1,
+              prevLink: Number(page) - 1
+            });
+          }
       });
     }
-});
-
-router.get('/browse/filter', function(req, res, next) {
-  let title;
-  if(req.query.city && req.query.zipOrPostal){
-    Post.find({city: req.query.city.toLowerCase(), zipOrPostal: req.query.zipOrPostal}, null, {sort:{createdAt: -1}},function(err, posts) {
-      //Sorting syntax: Model.find({conditions}, {projection(optional fields to return)},
-      // {options: object(sort)}, [callback: function])
-      if(err) return next(createError(err));
-      title = `MOTOSPOT || ${req.query.city} posts`;
-      if(posts.length === 0){
-        res.render('main', {
-          title: title,
-          posts: null
-        });
-      } else {
-          res.render('main', {
-          title: title,
-          posts: posts});
-        }
-    });
-  } else if(req.query.city) {
-    Post.find({city: req.query.city.toLowerCase()}, null, {sort:{createdAt: -1}},function(err, posts) {
-      if(err) return next(createError(err));
-      title = `MOTOSPOT || ${req.query.city} posts`;
-      if(posts.length === 0){
-        res.render('main', {
-          title: title,
-          posts: null
-        });
-      } else {
-              res.render('main', {
-              title: title,
-              posts: posts});
-        }
-    });
-  } else if(req.query.zipOrPostal) {
-    Post.find({zipOrPostal: req.query.zipOrPostal}, null, {sort:{createdAt: -1}},function(err, posts) {
-      if(err) return next(createError(err));
-      title =  `MOTOSPOT || (${req.query.zipOrPostal}) posts`;
-      if(posts.length === 0){
-        res.render('main', {
-          title: title,
-          posts: null
-        });
-      } else {
-              res.render('main', {
-              title: title,
-              posts: posts});
-        }
-    });
-  } else {
-      title = `MOTOSPOT || Browse Spots`;
-      res.redirect('/browse')
-  }
+  });
 });
 
 router.get('/singlepost', function(req, res, next) {

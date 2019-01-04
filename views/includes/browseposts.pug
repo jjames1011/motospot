@@ -7,6 +7,6 @@ else
       - var postId = post._id
         a(href='/singlepost?id=' + postId): li #{post.title} | $#{post.price}/MO
   if prevLink
-    a(href='/browse?page=' + prevLink): p(class='pagBtn') Prev Page 
+    a(href='/browse?page=' + prevLink + '&city='+ city + '&zipOrPostal=' + zipOrPostal): p(class='pagBtn') Prev Page 
   if nextLink
-    a(href='/browse?page=' + nextLink): p(class='pagBtn') Next Page
+    a(href='/browse?page=' + nextLink + '&city='+ city + '&zipOrPostal=' + zipOrPostal): p(class='pagBtn') Next Page
