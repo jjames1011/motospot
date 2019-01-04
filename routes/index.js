@@ -9,9 +9,6 @@ require('dotenv').config()
 //models:
 const Post = mongoose.model('Post');
 
-
-
-
 router.get('/', function(req, res, next) {
   res.redirect('/homepage');
 });
@@ -138,13 +135,10 @@ router.get('/browse', function(req, res, next) {
   } else {
     page = req.query.page;
   }
-
   //calc how many results to skip for db query[for pagination]
    skipAmount = page*15-15;
 
-
   Post.find(dbSearchFilters,null,{sort:{createdAt: -1}, limit: 15, skip: skipAmount},function(err, posts) {
-
     if(posts.length === 0){
       res.render('main', {
         title: title,
@@ -229,7 +223,5 @@ router.get('/del', function(req, res, next) {
     return res.redirect('/');
   }
 });
-
-
 
 module.exports = router;
