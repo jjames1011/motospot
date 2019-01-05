@@ -5,6 +5,7 @@ const moment = require('moment');
 const createError = require('http-errors');
 const nodemailer = require('nodemailer');
 const request = require('request');
+const sanitizer = require('sanitize')();
 require('dotenv').config()
 //models:
 const Post = mongoose.model('Post');
@@ -25,6 +26,7 @@ router.post('/postaspot', function(req, res, next) {
   let lonLat;
   let newPost;
 
+  //send confirmation email:
   let requestOpts = {
     url: `https://nominatim.openstreetmap.org/search?format=json&postalcode=${req.body.zipOrPostal}`,
     method: "GET",
@@ -41,21 +43,21 @@ router.post('/postaspot', function(req, res, next) {
 
   request(requestOpts, (err, response, body) => {
     if(err) next(createError(err));
-    // console.log('statusCode', response && response.statusCode);
     lonLat = `[${JSON.parse(body)[0].lon},${JSON.parse(body)[0].lat}]`;
+
     newPost = new Post({
-      title: req.body.title,
-      price: req.body.price,
-      email: req.body.email,
-      phone: req.body.phone,
-      fullName: req.body.fullName,
-      description: req.body.description,
-      addressLine1: req.body.addressLine1,
-      addressLine2: req.body.addressLine2,
-      city: req.body.city.toLowerCase(),
-      stateProvinceRegion: req.body.stateProvinceRegion,
-      zipOrPostal: req.body.zipOrPostal,
-      country: req.body.country,
+      title: sanitizer.value(req.body.title, 'str'),
+      price: sanitizer.value(req.body.price, 'int'),
+      email: sanitizer.value(req.body.email, 'email'),
+      phone: sanitizer.value(req.body.phone, 'phone'),
+      fullName: sanitizer.value(req.body.fullName, 'str'),
+      description: sanitizer.value(req.body.description, 'str'),
+      addressLine1: sanitizer.value(req.body.addressLine1, 'str'),
+      addressLine2: sanitizer.value(req.body.addressLine2, 'str'),
+      city: sanitizer.value(req.body.city.toLowerCase(), 'str'),
+      stateProvinceRegion: sanitizer.value(req.body.stateProvinceRegion, 'str'),
+      zipOrPostal: sanitizer.value(req.body.zipOrPostal, 'int'),
+      country: sanitizer.value(req.body.country, 'str'),
       expireAt: expireAt,
       delKey: delKey,
       lonLat: lonLat
@@ -76,7 +78,7 @@ router.post('/postaspot', function(req, res, next) {
         });
         let mailOptions = {
           from: process.env.GMAIL_USER,
-          to: req.body.email,
+          to: sanitizer.value(req.body.email, 'email'),
           subject: 'MOTOSPOT Ad confirmation',
           text: 'Your spot has been posted successfully!',
           html: `<h2>Thanks ${newPost.fullName} for posting your extra space on Motospot!</h2>
@@ -103,39 +105,39 @@ router.get('/browse', function(req, res, next) {
   //keep track of the filters[page, zipOrPostal] for 'next page' and
   //'prev page' links
   if(req.query.city && req.query.zipOrPostal){
-    city = req.query.city;
-    zipOrPostal = req.query.zipOrPostal;
+    city = sanitizer.value(req.query.city, 'str');
+    zipOrPostal = sanitizer.value(req.query.zipOrPostal,'int');
     title = `MOTOSPOT || ${city} posts`;
     dbSearchFilters = {
-      city: req.query.city.toLowerCase(),
-      zipOrPostal: req.query.zipOrPostal
+      city: city.toLowerCase(),
+      zipOrPostal: zipOrPostal
     };
   } else if (req.query.city){
-    city = req.query.city;
+    city = sanitizer.value(req.query.city, 'str');
     zipOrPostal = '';
     title = `MOTOSPOT || ${city} Posts`;
     dbSearchFilters = {
-      city: req.query.city.toLowerCase()
+      city: city.toLowerCase()
     }
   } else if (req.query.zipOrPostal) {
-    zipOrPostal = req.query.zipOrPostal;
+    zipOrPostal = sanitizer.value(req.query.zipOrPostal, 'int');
     city = '';
     title = `MOTOSPOT || ${zipOrPostal} Posts`;
     dbSearchFilters = {
-      zipOrPostal: req.query.zipOrPostal
+      zipOrPostal: zipOrPostal
     }
   } else {
     city = '';
     zipOrPostal = '';
     title = 'MOTOSPOT || All Posts'
   }
-  //if not a page query string assume client wants page 1
+  //if not a 'page' query string assume client wants page 1
   if(!req.query.page) {
     page = 1;
   } else {
-    page = req.query.page;
+    page = sanitizer.value(req.query.page, 'int');
   }
-  //calc how many results to skip for db query[for pagination]
+  //calc how many results to skip for db query[pagination]
    skipAmount = page*15-15;
 
   Post.find(dbSearchFilters,null,{sort:{createdAt: -1}, limit: 15, skip: skipAmount},function(err, posts) {
@@ -178,7 +180,8 @@ router.get('/browse', function(req, res, next) {
 
 router.get('/singlepost', function(req, res, next) {
   if(req.query.id){
-    Post.findById(req.query.id, function(err, post) {
+    let postId = sanitizer.value(req.query.id, 'str');
+    Post.findById(postId, function(err, post) {
       if(post){
         // var formattedDate = moment(post.createdAt).format('MMMM Do, YYYY');
         let formattedDate = moment(post.createdAt).fromNow();
@@ -205,7 +208,8 @@ router.get('/faq', function(req, res, next) {
 
 router.get('/del', function(req, res, next) {
   if(req.query.key){
-    Post.deleteOne({delKey: req.query.key}, function(err, post) {
+    let delKey = sanitizer.value(req.query.key, 'str');
+    Post.deleteOne({delKey: delKey}, function(err, post) {
       if(err){return next(createError(500))}
       if (post.n === 0){
         res.render('deleted', {
