@@ -12,9 +12,27 @@ block content
     div(class='group')
       include includes/postform.pug
       div(class='browse')
-        h1(id='browse') Browse posts: 
+        h1(id='browse') Browse posts: #{city} 
         include includes/searchForm.pug
         include includes/browseposts.pug
     div(class='footer')
       include includes/footer.pug
+    
+    script.
+      function getLocation() {
+      if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(updatePosts);
+      } else {
+      console.log("This browser does not support geolocation");
+      }
+      }
+      function updatePosts(position) {
+      window.location = 'http://localhost:3000/lonlat?usrCoords=' + position.coords.latitude + ',' + position.coords.longitude
+      }
+      window.onload = function() {
+      let url = new URL(window.location.href);
+      if (!(url.searchParams.get('page') || url.searchParams.get('city') || url.searchParams.get('zipOrPostal'))) {
+        getLocation();
+      }
+      }   
         

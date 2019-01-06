@@ -26,7 +26,7 @@ router.post('/postaspot', function(req, res, next) {
   let lonLat;
   let newPost;
 
-  //send confirmation email:
+  //geoEncode [longitude, latitude]
   let requestOpts = {
     url: `https://nominatim.openstreetmap.org/search?format=json&postalcode=${req.body.zipOrPostal}`,
     method: "GET",
@@ -96,10 +96,42 @@ router.post('/postaspot', function(req, res, next) {
     });
   });
 });
+//for use with users geolocation
+router.get('/lonlat', function(req, res, next) {
+  //if user grants permission take lon and lat and reverse geocode to get city.
+  //then redirect to /browse?city={userscity}
+  let usrCoords, lon, lat;
+  if(req.query.usrCoords){
+    usrCoords = req.query.usrCoords.split(',');
+    let requestOpts = {
+      //change to use coordinates instead of long lat
+      url: `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${usrCoords[0]}&lon=${usrCoords[1]}`,
+      method: "GET",
+      headers: {
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+        'Accept-Encoding': 'gzip, deflate, br',
+        'Accept-Language': 'en-US,en;q=0.5',
+        'Connection': 'keep-alive',
+        'Host': 'nominatim.openstreetmap.org',
+        'Referer': 'https://wiki.openstreetmap.org/wiki/Nominatim',
+        'Upgrade-Insecure-Requests': 1,
+        'User-Agent': 'Motospot (node application)'
+      }
+    }
+    request(requestOpts, (err, response, body) => {
+      if(err) next(createError(err));
+      JSON.parse(body)['address']['city']
+      res.redirect(`/browse?city=${JSON.parse(body)['address']['city']}`)
+    });
 
+  } else {
+    res.redirect('/browse?page=1')
+  }
+})
 router.get('/browse', function(req, res, next) {
   let dbSearchFilters = {};
   let skipAmount, page, city, zipOrPostal, title;
+
 
   //set search filters from query strings
   //keep track of the filters[page, zipOrPostal] for 'next page' and
@@ -141,11 +173,12 @@ router.get('/browse', function(req, res, next) {
    skipAmount = page*15-15;
 
   Post.find(dbSearchFilters,null,{sort:{createdAt: -1}, limit: 15, skip: skipAmount},function(err, posts) {
+    let capitalizedCity = city.charAt(0).toUpperCase() + city.slice(1)
     if(posts.length === 0){
       res.render('main', {
         title: title,
         posts: null,
-        city: city,
+        city: capitalizedCity,
         zipOrPostal: zipOrPostal,
         nextLink: null,
         prevLink: Number(page) - 1
@@ -158,7 +191,7 @@ router.get('/browse', function(req, res, next) {
             res.render('main', {
               title: title,
               posts: currentPosts,
-              city: city,
+              city: capitalizedCity,
               zipOrPostal: zipOrPostal,
               nextLink: null,
               prevLink: Number(page) - 1
@@ -167,7 +200,7 @@ router.get('/browse', function(req, res, next) {
             res.render('main', {
               title: title,
               posts: currentPosts,
-              city: city,
+              city: capitalizedCity,
               zipOrPostal: zipOrPostal,
               nextLink: Number(page) + 1,
               prevLink: Number(page) - 1
