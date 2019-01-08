@@ -453,6 +453,7 @@ footer p {
 
   .postform {
     width: 30vw;
+    display: block;
   }
   .group {
     margin: 0;
@@ -507,5 +508,11 @@ footer p {
   .postform {
     position: relative;
     overflow-x: scroll;
+  }
+}
+
+@media(max-height: 865px) {
+  footer {
+    border: none;
   }
 }
