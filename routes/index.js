@@ -14,7 +14,7 @@ router.get('/', function(req, res, next) {
   res.redirect('/homepage');
 });
 router.get('/homepage', function(req, res, next){
-  res.render('index', {title: 'Motospot || Find a spot for your ride!'});
+  res.render('index', {title: 'Motospot || Motorcycle Storage'});
 });
 
 
