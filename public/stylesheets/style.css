@@ -47,6 +47,7 @@ body {
 nav {
   height: 3vh;
   display: block;
+  position: fixed;
 }
 nav ul li {
   list-style: none;
@@ -239,7 +240,7 @@ footer a:hover {
 }
 
 .browse-list {
-  font-size: 1.2rem
+  font-size: 1.2rem;
 }
 
 
@@ -255,6 +256,9 @@ input[type='number']{
   background-color: rgba(0,0,0,.5);
   width: 15rem;
   height: 1.5rem;
+}
+input[name='price'] {
+  width: 14.2rem;
 }
 
 textarea {
@@ -330,7 +334,6 @@ input[type='submit'] {
 
 
 .browse-list li {
-  margin: auto;
   margin-top: 1vh;
   border: 1px solid white;
   border-radius: 5px;
@@ -371,6 +374,7 @@ input[type='submit'] {
 }
 
 .group {
+  padding-top: 6rem;
   margin-left: 10%;
   margin-right: 10%;
 }
@@ -397,10 +401,11 @@ footer p {
 
 .postform {
   float: left;
-  width: 50%;
+  width: 40%;
   border-right: 2px solid white;
   /* border-radius: 5px; */
   overflow: auto;
+  position: fixed;
 }
 
 .browse {
@@ -423,10 +428,10 @@ footer p {
   }
   .browse {
     width: 70vw;
-    margin: auto;
+    /* margin: auto; */
   }
   .browse-list {
-    width: 70vh;
+    width: 60vw;
     margin: auto;
   }
 
@@ -459,8 +464,14 @@ footer p {
     padding: 0;
   }
   .postform,
-  .browse {
+  .browse, nav {
     width: 100%;
+    position: static;
+    float: none;
+    margin: auto;
+  }
+  .group {
+    padding: 0;
   }
   #map {
     width: 90%;
