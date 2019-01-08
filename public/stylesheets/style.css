@@ -45,12 +45,29 @@ body {
   height: 100%;
 }
 nav {
-  height: 3vh;
+  border-bottom: 1.5px solid rgba(255, 255, 255, 0.1);
+  height: 5rem;
   display: block;
   position: fixed;
+  background-color: rgba(0, 0, 0,1);
+  width: 100%;
+}
+
+#singlepost-nav {
+  padding-top: 1rem;
+  position: static;
 }
 nav ul li {
-  list-style: none;
+  display: inline;
+}
+nav ul.right a {
+  text-decoration: none;
+  float: right;
+  margin-right: 3rem;
+  color: aqua;
+  font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
+  padding-top: 1rem;
+
 }
 
 footer {
@@ -274,7 +291,7 @@ textarea {
 /* layout styles ---- */
 nav {
   margin-bottom: 3%;
-  margin-top: 3%;
+  /* padding-top: 3%; */
 }
 nav ul {
   padding: 0;
@@ -481,5 +498,8 @@ footer p {
   }
   #singlepost {
     margin-left: 0;
+  }
+  nav ul.right a {
+    display: none;
   }
 }

@@ -170,9 +170,9 @@ router.get('/browse', function(req, res, next) {
     page = sanitizer.value(req.query.page, 'int');
   }
   //calc how many results to skip for db query[pagination]
-   skipAmount = page*15-15;
+   skipAmount = page*30-30;
 
-  Post.find(dbSearchFilters,null,{sort:{createdAt: -1}, limit: 15, skip: skipAmount},function(err, posts) {
+  Post.find(dbSearchFilters,null,{sort:{createdAt: -1}, limit: 30, skip: skipAmount},function(err, posts) {
     let capitalizedCity = city.charAt(0).toUpperCase() + city.slice(1)
     if(posts.length === 0){
       res.render('main', {
@@ -186,7 +186,7 @@ router.get('/browse', function(req, res, next) {
     } else {
       let currentPosts = posts;
       //Hit the db again to check if there are posts on next page to either omit or include 'next page' button...
-      Post.find(dbSearchFilters,null,{sort: {createdAt: -1}, limit: 15, skip: skipAmount + 15}, function(err, nextPosts) {
+      Post.find(dbSearchFilters,null,{sort: {createdAt: -1}, limit: 30, skip: skipAmount + 30}, function(err, nextPosts) {
           if(nextPosts.length === 0){
             res.render('main', {
               title: title,
