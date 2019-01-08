@@ -439,6 +439,10 @@ footer p {
   #singlepost {
     margin-left: 0;
   }
+  .garage {
+    height: 40vh;
+    width: 60vw;
+  }
 }
 @media(max-width: 768px) {
   #singlepost {
