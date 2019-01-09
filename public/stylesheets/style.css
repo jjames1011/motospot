@@ -299,8 +299,9 @@ nav ul {
 }
 
 .secondary-content {
+  margin: auto;
   margin-bottom: 10vh;
-  width: 100%;
+  width: 70vw;
 }
 .image-container {
   width: 100%;
@@ -518,7 +519,7 @@ footer p {
 }
 
 @media(max-height: 865px) {
-  footer {
+  .footer footer {
     border: none;
   }
 }
