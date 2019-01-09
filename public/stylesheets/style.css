@@ -291,6 +291,7 @@ textarea {
 /* layout styles ---- */
 nav {
   margin-bottom: 3%;
+  z-index: 1;
   /* padding-top: 3%; */
 }
 nav ul {
@@ -392,8 +393,8 @@ input[type='submit'] {
 
 .group {
   padding-top: 5.5rem;
-  margin-left: 10%;
-  margin-right: 10%;
+  margin-left: 10vw;
+  margin-right: 10vw;
 }
 footer {
   width: 100%;
@@ -418,14 +419,13 @@ footer p {
 
 .postform {
   float: left;
-  width: 40%;
+  width: 40vw;
   border-right: 2px solid white;
   position: fixed;
-  z-index: -1;
 }
 
 .browse {
-  width: 50%;
+  width: 40vw;
   float: right;
   text-align: center;
   margin: auto;
@@ -443,11 +443,10 @@ footer p {
     padding: 0;
   }
   .browse {
-    width: 70vw;
-    /* margin: auto; */
+    width: 60vw;
+    margin: auto;
   }
   .browse-list {
-    width: 60vw;
     margin: auto;
   }
 
@@ -456,7 +455,8 @@ footer p {
     display: block;
   }
   .group {
-    margin: 0;
+    margin-left:2vw;
+    margin-right: 2vw;
   }
   #singlepost {
     margin-left: 0;
@@ -482,13 +482,20 @@ footer p {
   }
   .postform,
   .browse, nav {
-    width: 100%;
+    width: 100vw;
     position: static;
     float: none;
     margin: auto;
+    border: none;
+  }
+  .browse-list {
+    width: 90vw;
+    margin: auto;
+    padding: 0;
   }
   .group {
     padding: 0;
+    margin: 0;
   }
   #map {
     width: 90%;
@@ -504,10 +511,9 @@ footer p {
   }
 }
 
-@media(max-height: 775px) {
+@media(max-height: 806px) {
   .postform {
     position: relative;
-    overflow-x: scroll;
   }
 }
 
