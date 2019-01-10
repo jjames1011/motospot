@@ -1,17 +1,22 @@
-extends layout 
+extends layout
 
-block content 
-  body(class='main')
+block content
+  body(class='main error')
     nav
       ul
         li 
           a(href='/')
             img(src='../images/logo.png' id='logo')
+      ul(class='right')
+        li 
+          a(href='/#faq')
+            | FAQ 
+        li
+          a(href='mailto:motospot.services@gmail.com')
+            | Support
+        li 
+          a(href='/browse')
+            | Browse
+    h1 Your post has been deleted! 
+    h2 Thank you for using Motospot!
     
-    h2(class='deleted') #{message}
-    a(href='../browse')
-      button(type='button' class='landing-button' id='delete-pg-btn') Browse Spots
-    a(href='../#faq')
-      button(type='button' class='landing-button' id='delete-pg-btn') FAQ
-      
-    include includes/footer.pug
