@@ -261,4 +261,9 @@ router.get('/del', function(req, res, next) {
   }
 });
 
+router.get('/terms', function(req, res, next) {
+  res.render('terms', {title: 'MOTOSPOT || Terms Of Use'})
+
+})
+
 module.exports = router;

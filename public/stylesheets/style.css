@@ -83,6 +83,19 @@ footer a:hover {
   text-decoration: underline;
 }
 
+.terms {
+  text-align: center;
+  width: 60vw;
+  margin: auto;
+}
+#termsfooter footer{
+  border: none;
+}
+
+.aquabold {
+  color: aqua;
+  font-weight: bold;
+}
 
 #logo {
   height: 2rem;
@@ -467,6 +480,9 @@ footer p {
     height: 40vh;
     width: 60vw;
   }
+  .terms {
+    width: 80vw;
+  }
 }
 @media(max-width: 768px) {
   #singlepost {
@@ -510,6 +526,9 @@ footer p {
   }
   nav ul.right a {
     display: none;
+  }
+  .terms {
+    width: 80vw;
   }
 }
 
