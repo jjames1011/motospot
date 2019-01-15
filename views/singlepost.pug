@@ -34,17 +34,51 @@ block content
         p #{post.city + ', ' + post.stateProvinceRegion + ' ' + post.zipOrPostal}
     div(class='footer')
       include includes/footer.pug
-    script.
-          var map = new ol.Map({
-          target: 'map',
-          layers: [
-          new ol.layer.Tile({
-          source: new ol.source.OSM()
-          })
-          ],
-          view: new ol.View({
-          center: ol.proj.fromLonLat(#{post.lonLat}),
-          zoom: 13
-          })
-          });
+    if post.spotLonLat
+      script.
+            var map = new ol.Map({
+            target: 'map',
+            layers: [
+            new ol.layer.Tile({
+            source: new ol.source.OSM()
+            })
+            ],
+            view: new ol.View({
+            center: ol.proj.fromLonLat(#{post.spotLonLat}),
+            zoom: 13
+            })
+            });
+            
+            var vectorLayer = new ol.layer.Vector({
+            source: new ol.source.Vector({
+            features: [new ol.Feature({
+            geometry: new ol.geom.Point(ol.proj.fromLonLat(#{post.spotLonLat}))
+            })]
+            }),
+            style: new ol.style.Style({
+            image: new ol.style.Icon({
+            anchor: [0.5, 0.5],
+            anchorXUnits: "fraction",
+            anchorYUnits: "fraction",
+            src: "https://upload.wikimedia.org/wikipedia/commons/e/ec/RedDot.svg"
+            })
+            })
+            });
+            map.addLayer(vectorLayer);
+    if post.zipLonLat
+      script.
+            var map = new ol.Map({
+            target: 'map',
+            layers: [
+            new ol.layer.Tile({
+            source: new ol.source.OSM()
+            })
+            ],
+            view: new ol.View({
+            center: ol.proj.fromLonLat(#{post.zipLonLat}),
+            zoom: 13
+            })
+            });
+    
+          
         

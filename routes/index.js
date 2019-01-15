@@ -23,12 +23,25 @@ router.post('/postaspot', function(req, res, next) {
   let expireAt = moment().add(1, 'month').toDate();
   //Use mongo ObjectId() to create a new id for the delKey
   let delKey = new mongoose.Types.ObjectId();
-  let lonLat;
+  let spotLonLat, zipLonLat;
   let newPost;
+  let url;
+
+  //if user supplies full address query for it instead of just zipOrPostal. else just query
+  //for zipOrPostal
+  if(req.body.addressLine1){
+    let address = sanitizer.value(req.body.addressLine1, 'str');
+    let city = sanitizer.value(req.body.city.toLowerCase(), 'str');
+    let zipOrPostal = sanitizer.value(req.body.zipOrPostal, 'int');
+    address = address.replace(/ /g,"+");
+    url = `https://nominatim.openstreetmap.org/search?format=json&q=${address}&city=${city}&postalcode=${zipOrPostal}`;
+  } else {
+    url = `https://nominatim.openstreetmap.org/search?format=json&postalcode=${req.body.zipOrPostal}`
+  }
 
   //geoEncode [longitude, latitude]
   let requestOpts = {
-    url: `https://nominatim.openstreetmap.org/search?format=json&postalcode=${req.body.zipOrPostal}`,
+    url: url,
     method: "GET",
     headers: {
       'Accept': 'application/json,text/html,application/xhtml+xml,application/xml,application/xml;q=0.9,*/*;q=0.8',
@@ -43,7 +56,14 @@ router.post('/postaspot', function(req, res, next) {
 
   request(requestOpts, (err, response, body) => {
     if(err) next(createError(err));
-    lonLat = `[${JSON.parse(body)[0].lon},${JSON.parse(body)[0].lat}]`;
+    if(req.body.addressLine1) {
+      spotLonLat = `[${JSON.parse(body)[0].lon},${JSON.parse(body)[0].lat}]`;
+    } else {
+      zipLonLat = `[${JSON.parse(body)[0].lon},${JSON.parse(body)[0].lat}]`;
+    }
+
+
+
 
     newPost = new Post({
       title: sanitizer.value(req.body.title, 'str'),
@@ -60,7 +80,8 @@ router.post('/postaspot', function(req, res, next) {
       country: sanitizer.value(req.body.country, 'str'),
       expireAt: expireAt,
       delKey: delKey,
-      lonLat: lonLat
+      spotLonLat: spotLonLat,
+      zipLonLat: zipLonLat
     });
 
     newPost.save(function(err, newPost) {
