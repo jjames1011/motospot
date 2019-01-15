@@ -85,7 +85,7 @@ router.post('/postaspot', function(req, res, next) {
     });
 
     newPost.save(function(err, newPost) {
-      if(err) return console.log(err);
+      if(err) return next(createError(err));
 
       //send email if no error
         let transporter = nodemailer.createTransport({
