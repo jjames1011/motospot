@@ -130,7 +130,7 @@ router.get('/lonlat', function(req, res, next) {
 })
 router.get('/browse', function(req, res, next) {
   let dbSearchFilters = {};
-  let skipAmount, page, city, zipOrPostal, title;
+  let skipAmount, page, city, zipOrPostal, title, error;
 
 
   //set search filters from query strings
@@ -225,13 +225,12 @@ router.get('/singlepost', function(req, res, next) {
             title: title
           });
       } else {
-        //#TODO: use nextError() instead of query params
-        return res.redirect('/browse?err=true');
+        return next(createError(404));
       }
     });
   } else {
     //#TODO: use nextError() instead of query params
-    return res.redirect('/browse?err=true');
+    return next(createError(404));
   }
 });
 
