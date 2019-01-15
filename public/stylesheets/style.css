@@ -239,6 +239,9 @@ footer a:hover {
 .postform textarea {
   resize: none;
 }
+.postform p {
+ margin: -10px 0 10px 0;
+}
 .main {
   background:
     linear-gradient(black 10%, transparent 80%),
