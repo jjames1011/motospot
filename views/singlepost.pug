@@ -26,11 +26,12 @@ block content
         p #{post.phone}
         
     //- Needs to be in order of button -> div for the hideshow(e) to work
-    button(onclick='hideShow(event)' class='contact-button') Show address
-    div(class='hideshow')
-      p #{post.addressLine1}
-      p #{post.addressLine2}
-      p #{post.city + ', ' + post.stateProvinceRegion + ' ' + post.zipOrPostal}
+    if post.addressLine1
+      button(onclick='hideShow(event)' class='contact-button') Show address
+      div(class='hideshow')
+        p #{post.addressLine1}
+        p #{post.addressLine2}
+        p #{post.city + ', ' + post.stateProvinceRegion + ' ' + post.zipOrPostal}
     div(class='footer')
       include includes/footer.pug
     script.

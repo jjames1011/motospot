@@ -22,11 +22,11 @@ div(class='postform')
     label(for='fullName') Enter your full name: 
     input(type='text' name='fullName' placeholder='(eg: John Doe)' required)
     label(for='addressLine1') Address Line 1:
-    input(type='text' name='addressLine1' placeholder='1234 NE Main St' required)
+    input(type='text' name='addressLine1' placeholder='1234 NE Main St')
     label(for='addressLine2') Address Line 2:
     input(type='text'  name='addressLine2')
     label(for='city') City:
-    input(type='text' name='city' placeholder='Portland' required)
+    input(type='text' name='city' placeholder='Beverly Hills')
     label(for='stateProvinceRegion') State / Province / Region:
     select(required name='stateProvinceRegion')
       option(value='AL') AL
@@ -81,11 +81,11 @@ div(class='postform')
       option(value='WV') WV
       option(value='WY') WY
     label(for='zipOrPostal') ZIP / Postal Code:
-    input(type='text' name='zipOrPostal' required)
+    input(type='text' name='zipOrPostal' placeholder='90210' required)
         
     
     
     label(for='textarea') Enter a description:
-    textarea(name='description' rows='10' cols='35' placeholder='eg:Spot in private garage. Access to electricity. 24/HR Access.')
+    textarea(name='description' rows='10' cols='35' placeholder='eg: Spot in private garage. Access to electricity. 24/HR Access.')
     input(type='submit' value='submit')
         
