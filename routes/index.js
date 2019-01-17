@@ -22,7 +22,7 @@ router.post('/postaspot', function(req, res, next) {
   //Use moment to add month to date for auto document expiration
   let expireAt = moment().add(1, 'month').toDate();
   let formattedCreatedAtDate = moment().format('MMM DDDo').toString();
-  
+
   //Use mongo ObjectId() to create a new id for the delKey
   let delKey = new mongoose.Types.ObjectId();
   let spotLonLat, zipLonLat;
@@ -247,7 +247,7 @@ router.get('/singlepost', function(req, res, next) {
       if(post){
         // var formattedDate = moment(post.createdAt).format('MMMM Do, YYYY');
         let formattedDate = moment(post.createdAt).fromNow();
-        let title = post.title;
+        let title = 'Motospot || ' + post.title;
           res.render('singlepost', {
             post : post,
             postedDate: formattedDate,
