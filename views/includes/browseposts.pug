@@ -2,10 +2,11 @@
 if !posts
   p Sorry there are currently no recent posts in your area. Feel free to add one!
 else
+  h4 Price | Title | Date posted: 
   ul(class='browse-list')
     each post in posts
       - var postId = post._id
-        a(href='/singlepost?id=' + postId): li #{post.title} | $#{post.price}/MO
+          a(href='/singlepost?id=' + postId): li $#{post.price}/MO | #{post.title} | #{post.formattedCreatedAtDate}
   if prevLink
     a(href='/browse?page=' + prevLink + '&city='+ city + '&zipOrPostal=' + zipOrPostal): p(class='pagBtn') Prev Page 
   if nextLink

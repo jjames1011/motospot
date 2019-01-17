@@ -24,7 +24,8 @@ var postSchema = new mongoose.Schema({
   expireAt: {
     type: Date,
     default: null,
-  }
+  },
+  formattedCreatedAtDate: String
 });
 
 postSchema.index({delKey: 1}, { unique: true});

@@ -21,6 +21,8 @@ router.get('/homepage', function(req, res, next){
 router.post('/postaspot', function(req, res, next) {
   //Use moment to add month to date for auto document expiration
   let expireAt = moment().add(1, 'month').toDate();
+  let formattedCreatedAtDate = moment().format('MMM DDDo').toString();
+  
   //Use mongo ObjectId() to create a new id for the delKey
   let delKey = new mongoose.Types.ObjectId();
   let spotLonLat, zipLonLat;
@@ -63,9 +65,6 @@ router.post('/postaspot', function(req, res, next) {
       zipLonLat = `[${JSON.parse(body)[0].lon},${JSON.parse(body)[0].lat}]`;
     }
 
-
-
-
     newPost = new Post({
       title: sanitizer.value(req.body.title, 'str'),
       price: sanitizer.value(req.body.price, 'int'),
@@ -82,7 +81,8 @@ router.post('/postaspot', function(req, res, next) {
       expireAt: expireAt,
       delKey: delKey,
       spotLonLat: spotLonLat,
-      zipLonLat: zipLonLat
+      zipLonLat: zipLonLat,
+      formattedCreatedAtDate: formattedCreatedAtDate
     });
 
     newPost.save(function(err, newPost) {
