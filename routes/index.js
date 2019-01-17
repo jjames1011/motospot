@@ -32,9 +32,10 @@ router.post('/postaspot', function(req, res, next) {
   if(req.body.addressLine1){
     let address = sanitizer.value(req.body.addressLine1, 'str');
     let city = sanitizer.value(req.body.city.toLowerCase(), 'str');
-    let zipOrPostal = sanitizer.value(req.body.zipOrPostal, 'int');
+    let zipOrPostal = sanitizer.value(req.body.zipOrPostal, 'int')
+    let state = sanitizer.value(req.body.stateProvinceRegion, 'str');
     address = address.replace(/ /g,"+");
-    url = `https://nominatim.openstreetmap.org/search?format=json&q=${address}&city=${city}&postalcode=${zipOrPostal}`;
+    url = `https://nominatim.openstreetmap.org/search?format=json&q=${address}&city=${city}&postalcode=${zipOrPostal}&state=${state}`;
   } else {
     url = `https://nominatim.openstreetmap.org/search?format=json&postalcode=${req.body.zipOrPostal}`
   }
