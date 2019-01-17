@@ -103,9 +103,16 @@ router.post('/postaspot', function(req, res, next) {
           to: sanitizer.value(req.body.email, 'email'),
           subject: 'MOTOSPOT Ad confirmation',
           text: 'Your spot has been posted successfully!',
-          html: `<h2>Thanks ${newPost.fullName} for posting your extra space on Motospot!</h2>
-          <p> Click <a href="http://localhost:3000/singlepost?id=${newPost.id}">Here</a> to view your post live!</p>
-          <p>If you would like to delete your post you can do so by clicking <a href="http://localhost:3000/del?key=${delKey}">here</a>.</p>`
+          html: `<div style="  border: .5px solid grey;
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 10px 10px 50px black;
+            background: linear-gradient(360deg, black 50%, aqua 150%);">
+            <h2 style="color: aqua">Thanks ${newPost.fullName} for posting your extra space on Motospot!</h2>
+            <p style="color: white;"> Click <a href="http://localhost:3000/singlepost?id=${newPost.id}">Here</a> to view your post live!</p>
+            <p style="color: white;">If you would like to delete your post you can do so by clicking <a href="http://localhost:3000/del?key=${delKey}">Here</a>.</p>
+          </div>
+          `
         };
 
         transporter.sendMail(mailOptions, (error, info) => {
