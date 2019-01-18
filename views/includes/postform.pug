@@ -7,28 +7,42 @@
 
 div(class='postform')
   h1 Post a spot: 
-  p *Required
+  p
+    span(id='asterisk') * 
+    | Required
   form(action='/postaspot' method='post')
-    label(for='title') * Title of post:
+    label(for='title') 
+      span(id='asterisk') * 
+      | Title of post:
     input(type='text' placeholder='(eg: Spot in NE!)' name='title' required)
-    label(for='price') * How much is rent per month? 
+    label(for='price') 
+      span(id='asterisk') * 
+      | How much is rent per month? 
     span $ 
       input(type='number' placeholder='50' name='price' required)
-    label(for='email') * Please enter your email: 
+    label(for='email') 
+      span(id='asterisk') *  
+      | Please enter your email: 
     input(type='email' name='email' placeholder='(eg: john.doe@gmail.com)' required)
     label(for='phone') Phone Number:
     input(type='tel' name='phone' placeholder='(xxx)-xxx-xxxx')
       
     
-    label(for='fullName') * Enter your full name: 
+    label(for='fullName') 
+      span(id='asterisk') * 
+      | Enter your full name: 
     input(type='text' name='fullName' placeholder='(eg: John Doe)' required)
     label(for='addressLine1') Address Line 1:
     input(type='text' name='addressLine1' placeholder='1234 NE Main St')
     label(for='addressLine2') Address Line 2:
     input(type='text'  name='addressLine2')
-    label(for='city') * City:
+    label(for='city') 
+      span(id='asterisk') *  
+      | City:
     input(type='text' name='city' placeholder='Beverly Hills' required)
-    label(for='stateProvinceRegion') * State / Province / Region:
+    label(for='stateProvinceRegion') 
+      span(id='asterisk') * 
+      | State / Province / Region:
     select(required name='stateProvinceRegion')
       option(value='') Select
       option(value='AL') AL
@@ -82,7 +96,9 @@ div(class='postform')
       option(value='WI') WI
       option(value='WV') WV
       option(value='WY') WY
-    label(for='zipOrPostal') * ZIP / Postal Code:
+    label(for='zipOrPostal') 
+      span(id='asterisk') * 
+      | ZIP / Postal Code:
     input(type='text' name='zipOrPostal' placeholder='90210' required)
         
     

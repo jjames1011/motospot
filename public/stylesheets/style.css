@@ -53,6 +53,9 @@ nav {
   width: 100%;
 }
 
+#asterisk {
+  color: aqua;
+}
 .error nav {
   position: static;
 }
