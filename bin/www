@@ -11,10 +11,10 @@ const
 https = require('https'),
 fs = require('fs');
 
-const options = {
-  key: fs.readFileSync('SSL/server.key'),
-  cert: fs.readFileSync('SSL/server.crt')
-};
+// const options = {
+//   key: fs.readFileSync('SSL/server.key'),
+//   cert: fs.readFileSync('SSL/server.crt')
+// };
 
 /**
  * Get port from environment and store in Express.
