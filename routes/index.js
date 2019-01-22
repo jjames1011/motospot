@@ -109,8 +109,8 @@ router.post('/postaspot', function(req, res, next) {
             box-shadow: 10px 10px 50px black;
             background: linear-gradient(360deg, black 50%, aqua 150%);">
             <h2 style="color: aqua">Thanks ${newPost.fullName} for posting your extra space on Motospot!</h2>
-            <p style="color: white;"> Click <a href="http://localhost:3000/singlepost?id=${newPost.id}">Here</a> to view your post live!</p>
-            <p style="color: white;">If you would like to delete your post you can do so by clicking <a href="http://localhost:3000/del?key=${delKey}">Here</a>.</p>
+            <p style="color: white;"> Click <a href="${process.env.ENV}/singlepost?id=${newPost.id}">Here</a> to view your post live!</p>
+            <p style="color: white;">If you would like to delete your post you can do so by clicking <a href="${process.env.ENV}/del?key=${delKey}">Here</a>.</p>
           </div>
           `
         };
