@@ -218,7 +218,7 @@ footer a:hover {
 }
 .faq {
   display: block;
-  padding: 1vh 6vh 1vh 6vh;
+  /* padding: 1vh 6vh 1vh 6vh; */
   color: white;
   overflow: auto;
 }
@@ -492,6 +492,10 @@ footer p {
   }
 }
 @media(max-width: 768px) {
+  .secondary-content {
+    width: 95vw;
+    margin: auto;
+  }
   #singlepost {
     margin: 0;
   }
@@ -514,7 +518,7 @@ footer p {
     border: none;
   }
   .browse-list {
-    width: 90vw;
+    width: 95vw;
     margin: auto;
     padding: 0;
   }
