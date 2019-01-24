@@ -63,9 +63,7 @@ nav {
   padding-top: 1rem;
   position: static;
 }
-.header {
-  width: 100vw;
-}
+
 nav ul li {
   display: inline;
 }
