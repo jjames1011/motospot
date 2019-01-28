@@ -9,6 +9,8 @@ const sanitizer = require('sanitize')();
 require('dotenv').config()
 //models:
 const Post = mongoose.model('Post');
+const middleware = require('../middleware/searchutil.js');
+
 
 router.get('/', function(req, res, next) {
   res.redirect('/homepage');
@@ -166,27 +168,20 @@ router.get('/browse', function(req, res, next) {
   //keep track of the filters[page, zipOrPostal] for 'next page' and
   //'prev page' links
   if(req.query.city && req.query.zipOrPostal){
-    city = sanitizer.value(req.query.city, 'str');
-    zipOrPostal = sanitizer.value(req.query.zipOrPostal,'int');
+    dbSearchFilters = middleware.formatSearchFilters(req.query.city, req.query.zipOrPostal);
+    city = dbSearchFilters.city;
+    zipOrPostal = dbSearchFilters.zipOrPostal;
     title = `MOTOSPOT || ${city} posts`;
-    dbSearchFilters = {
-      city: city.toLowerCase(),
-      zipOrPostal: zipOrPostal
-    };
   } else if (req.query.city){
-    city = sanitizer.value(req.query.city, 'str');
+    dbSearchFilters = middleware.formatSearchFilters(req.query.city);
+    city = dbSearchFilters.city;
     zipOrPostal = '';
     title = `MOTOSPOT || ${city} Posts`;
-    dbSearchFilters = {
-      city: city.toLowerCase()
-    }
   } else if (req.query.zipOrPostal) {
-    zipOrPostal = sanitizer.value(req.query.zipOrPostal, 'int');
+    dbSearchFilters = middleware.formatSearchFilters('', req.query.zipOrPostal)
+    zipOrPostal = dbSearchFilters.zipOrPostal;
     city = '';
     title = `MOTOSPOT || ${zipOrPostal} Posts`;
-    dbSearchFilters = {
-      zipOrPostal: zipOrPostal
-    }
   } else {
     city = '';
     zipOrPostal = '';
