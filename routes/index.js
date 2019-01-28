@@ -216,6 +216,7 @@ router.get('/browse', function(req, res, next) {
       let currentPosts = posts;
       //Hit the db again to check if there are posts on next page to either omit or include 'next page' button...
       Post.find(dbSearchFilters,null,{sort: {createdAt: -1}, limit: 30, skip: skipAmount + 30}, function(err, nextPosts) {
+        //if there are no posts on the next page or page after the current one then leave out the 'next page' button on front end
           if(nextPosts.length === 0){
             res.render('main', {
               title: title,
@@ -226,6 +227,7 @@ router.get('/browse', function(req, res, next) {
               prevLink: Number(page) - 1
             });
           } else {
+            //else there IS posts on next page therefore include 'next page' button.
             res.render('main', {
               title: title,
               posts: currentPosts,
