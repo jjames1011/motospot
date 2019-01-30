@@ -5,10 +5,10 @@ block content
     nav(id='singlepost-nav')  
       ul
         li
+          button(class='back-btn' onclick='goBack()' type='button') <-- Back
+        li
           a(href='/')
             img(src='images/logo.png' id='centered-logo')
-        li
-          button(class='back-btn' onclick='goBack()' type='button') <-- Back
     h1 $#{post.price}/MO | #{post.title}
     p Posted: #{postedDate}
       

@@ -174,7 +174,7 @@ footer a:hover {
 }
 .contact-button {
   font-size: 1rem;
-  background-color: transparent;
+  background-color: rgba(0,0,0,.9);
   text-decoration: none;
   border: 1px solid white;
   color: white;
@@ -185,6 +185,7 @@ footer a:hover {
   width: 25vw;
   /* overflow: ; */
   white-space: nowrap;
+  font-weight: bold;
 }
 
 .pagBtn {
@@ -204,7 +205,6 @@ footer a:hover {
 .contact-button:hover {
   border: 1px solid aqua;
   color: aqua;
-  font-weight: bold;
 }
 
 .landing-background {
@@ -586,14 +586,15 @@ footer p {
 
 @media(max-width: 416px) {
   .back-btn {
-    float: none;
+    /* float: none; */
     display: block;
     margin: auto;
-    margin-bottom: .5rem;
-    margin-top: .5rem;
+    /* margin-bottom: .5rem;
+    margin-top: .5rem; */
   }
   #centered-logo {
-    margin-left: 0;
+    float: right;
+    margin-right: 2rem;
   }
 }
 
