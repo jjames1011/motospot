@@ -556,6 +556,11 @@ footer p {
     margin: auto;
     border: none;
   }
+  nav  {
+    height: 5vh;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  }
   .browse-list {
     width: 95vw;
     margin: auto;
@@ -572,7 +577,7 @@ footer p {
     width: 90vw;
     height: 60vw;
   }
-  nav ul.right a {
+  nav ul.right a  {
     display: none;
   }
   .singlepost {
@@ -588,13 +593,19 @@ footer p {
   .back-btn {
     /* float: none; */
     display: block;
-    margin: auto;
+    margin-left: .5rem;
+    margin-top: .2rem;
     /* margin-bottom: .5rem;
     margin-top: .5rem; */
   }
   #centered-logo {
     float: right;
-    margin-right: 2rem;
+    margin-right: .5rem;
+    margin-top: 0;
+
+  }
+  #singlepost-nav {
+    padding-top: 0;
   }
 }
 

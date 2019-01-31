@@ -16,11 +16,12 @@ block content
           a(href='/#faq')
             | FAQ
     div(class='group')
-      include includes/postform.pug
+      
       div(class='browse')
         h1(id='browse') Browse Posts: #{city || zipOrPostal} 
         include includes/searchForm.pug
         include includes/browseposts.pug
+      include includes/postform.pug
     div(class='footer')
       include includes/footer.pug
     
