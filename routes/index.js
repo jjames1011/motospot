@@ -13,9 +13,9 @@ const middleware = require('../middleware/searchutil.js');
 
 
 router.get('/', function(req, res, next) {
-  res.redirect('/homepage');
+  res.redirect('/home');
 });
-router.get('/homepage', function(req, res, next){
+router.get('/home', function(req, res, next){
   res.render('index', {title: 'Motospot || Motorcycle Storage Sharing'});
 });
 
