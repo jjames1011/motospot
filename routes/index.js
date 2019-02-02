@@ -169,17 +169,17 @@ router.get('/browse', function(req, res, next) {
   //'prev page' links
   if(req.query.city && req.query.zipOrPostal){
     dbSearchFilters = middleware.formatSearchFilters(req.query.city, req.query.zipOrPostal);
-    city = dbSearchFilters.$and[0].$or[1].city;
-    zipOrPostal = dbSearchFilters.zipOrPostal;
+    city = sanitizer.value(req.query.city, 'str');
+    zipOrPostal = sanitizer.value(req.query.zipOrPostal, 'int');
     title = `MOTOSPOT || ${city} posts`;
   } else if (req.query.city){
     dbSearchFilters = middleware.formatSearchFilters(req.query.city);
-    city = dbSearchFilters.$or[1].city;
+    city = sanitizer.value(req.query.city, 'str');
     zipOrPostal = '';
     title = `MOTOSPOT || ${city} Posts`;
   } else if (req.query.zipOrPostal) {
     dbSearchFilters = middleware.formatSearchFilters('', req.query.zipOrPostal)
-    zipOrPostal = dbSearchFilters.zipOrPostal;
+    zipOrPostal = sanitizer.value(req.query.zipOrPostal, 'int');
     city = '';
     title = `MOTOSPOT || ${zipOrPostal} Posts`;
   } else {
