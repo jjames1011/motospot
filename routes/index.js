@@ -169,12 +169,12 @@ router.get('/browse', function(req, res, next) {
   //'prev page' links
   if(req.query.city && req.query.zipOrPostal){
     dbSearchFilters = middleware.formatSearchFilters(req.query.city, req.query.zipOrPostal);
-    city = dbSearchFilters.city;
+    city = dbSearchFilters.$and[0].$or[1].city;
     zipOrPostal = dbSearchFilters.zipOrPostal;
     title = `MOTOSPOT || ${city} posts`;
   } else if (req.query.city){
     dbSearchFilters = middleware.formatSearchFilters(req.query.city);
-    city = dbSearchFilters.city;
+    city = dbSearchFilters.$or[1].city;
     zipOrPostal = '';
     title = `MOTOSPOT || ${city} Posts`;
   } else if (req.query.zipOrPostal) {
@@ -195,8 +195,10 @@ router.get('/browse', function(req, res, next) {
   }
   //calc how many results to skip for db query[pagination]
    skipAmount = page*30-30;
-
   Post.find(dbSearchFilters,null,{sort:{createdAt: -1}, limit: 30, skip: skipAmount},function(err, posts) {
+    if(err){
+      return next(createError(err));
+    }
     let capitalizedCity = city.charAt(0).toUpperCase() + city.slice(1)
     if(posts.length === 0){
       res.render('main', {
