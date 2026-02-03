@@ -6,6 +6,6 @@ Pug / Jquery
 Hosted on A Ubuntu Digital Ocean Droplet
 
 # motospot
-A web application written with the Express framework to help connect motorcyclist with propper storage for their rides!
+A web application written with the Express framework to help connect motorcyclist with proper storage for their rides!
 
 visit @ www.motospot.io
